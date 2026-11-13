@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  function isSignedIn() {
+      return request.auth != null;
+    }
+     // دالة للتحقق من كون المستخدم مدير
+    function isAdmin() {
+      return isSignedIn() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.userType == "admin";
+    }
+
+    // --- قواعد خاصة بالمجموعات ---
+
+    // أي مستخدم مدير له كامل الصلاحيات على كل شيء
+    match /{document=**} {
+      allow read, write: if isAdmin();
+    }
+    // السماح للمستخدمين بالوصول إلى بياناتهم فقط
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+
+    // السماح بإنشاء مستندات جديدة
+    match /users/{userId} {
+      allow create: 
+        if request.auth != null
+        && request.auth.uid == userId
+        && request.data.keys().hasAll(['email', 'is_premium', 'devices']);
+    }
+
+    // صلاحيات إضافية للقراءة
+    match /public/{document} {
+      allow read: if true;
+    }
+    
+  match /guests/{guestId} {
+      allow read, write, update: if true;
+    }
+    // --- referral notifications: وسيلة آمنة للإخطار بين المستخدمين ---
+    // كل وثيقة فيها: senderUid, targetUid, type='referral', processed (boolean), createdAt
+    match /referral_notifications/{notifId} {
+      // أي مستخدم مسجّل يستطيع إنشاء إشعار لشخص آخر
+      allow create: if isSignedIn() &&
+        request.resource.data.senderUid == request.auth.uid &&
+        request.resource.data.targetUid is string &&
+        request.resource.data.type == 'referral';
+
+      // قراءة/حذف/تحديث: فقط المستلم
+      allow read, update, delete: if isSignedIn() && resource.data.targetUid == request.auth.uid;
+    }
+  }
+}

@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سياسة الخصوصية - تطبيق إنشاء عروض الأسعار</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --border-color: #dee2e6;
+                --bg-color: #f5f7fa;
+    --text-color: #333;
+    --content-bg: white;
+        }
+       [data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --content-bg: #2d2d2d;
+    --primary-color: #3498db;
+    --dark-color: #f8f9fa;
+}
+ 
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+    color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50px;
+            padding: 10px 15px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            min-width: 150px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .lang-dropdown.show {
+            display: block;
+        }
+        
+        .lang-option {
+            padding: 12px 15px;
+            color: var(--dark-color);
+            text-decoration: none;
+            display: block;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
+        }
+        
+        .lang-option:last-child {
+            border-bottom: none;
+        }
+        
+        .lang-option:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+             header h0 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        [data-theme="dark"] .lang-dropdown {
+    background: #2d2d2d;
+    border: 1px solid #444;
+}
+
+[data-theme="dark"] .lang-option {
+    color: #ffffff;
+    border-bottom: 1px solid #444;
+}
+
+[data-theme="dark"] .lang-option:hover {
+    background: #3498db;
+    color: white;
+}
+
+[data-theme="dark"] .lang-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+[data-theme="dark"] .lang-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+        
+        .content {
+            background-color: var(--content-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        h0 {
+            color: white;
+            margin-bottom: 15px;
+         }
+            
+        h2 {
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul {
+            margin: 15px 0;
+            padding-right: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-section h2 {
+            color: white;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 25px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-width: 200px;
+        }
+        
+        .contact-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .contact-item i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .highlight {
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 15px;
+            border-right: 4px solid var(--secondary-color);
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+        
+        .date {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--dark-color);
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+               header h0 {
+                font-size: 2rem;
+            }
+            
+     
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-item {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .language-switcher {
+                top: 15px;
+                left: 15px;
+            }
+            
+            .lang-btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+        
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="language-switcher">
+            <button class="lang-btn">
+                <i class="fas fa-globe"></i>
+                <span id="current-lang">العربية</span>
+            </button>
+            <div class="lang-dropdown" id="lang-dropdown">
+                <a href="#" class="lang-option" data-lang="ar">العربية</a>
+                <a href="#" class="lang-option" data-lang="en">English</a>
+                <a href="#" class="lang-option" data-lang="fr">Français</a>
+                <a href="#" class="lang-option" data-lang="es">Español</a>
+                <a href="#" class="lang-option" data-lang="de">Deutsch</a>
+                <a href="#" class="lang-option" data-lang="tr">Türkçe</a>
+                <a href="#" class="lang-option" data-lang="ru">Русский</a>
+            </div>
+        </div>
+        
+        <div class="container">
+            <h0 id="policy-title">سياسة الخصوصية</h0>
+            <p id="policy-subtitle">لتطبيق إنشاء عروض الأسعار</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="content">
+            <p class="date" id="effective-date">تاريخ السريان: 12 سبتمبر 2025</p>
+            
+            <p id="intro-text">توضح سياسة الخصوصية هذه كيفية جمع واستخدام والكشف عن معلوماتك الشخصية عند استخدامك لتطبيق إنشاء عروض الأسعار (المشار إليه فيما بعد بـ "التطبيق"). نحن نلتزم بحماية خصوصيتك ونقدر ثقتك بنا. يرجى قراءة هذه السياسة بعناية لفهم ممارساتنا المتعلقة ببياناتك.</p>
+            
+            <h2 id="section1-title">1. المعلومات التي نجمعها</h2>
+            
+            <h3 id="section1-1-title">1.1. المعلومات التي تقدمها لنا مباشرةً</h3>
+            <p id="section1-1-desc">عند استخدامك للتطبيق، قد نطلب منك تقديم معلومات شخصية معينة، والتي قد تشمل على سبيل المثال لا الحصر:</p>
+            <ul>
+                <li><strong id="section1-1-li1-title">معلومات الحساب:</strong> <span id="section1-1-li1-desc">عند تسجيل الدخول باستخدام حساب Google الخاص بك، نجمع عنوان بريدك الإلكتروني ومعرف المستخدم الخاص بك من Google. هذه المعلومات ضرورية لإدارة حسابك وتوفير ميزات الترخيص وإدارة الأجهزة.</span></li>
+                <li><strong id="section1-1-li2-title">معلومات الشركة:</strong> <span id="section1-1-li2-desc">إذا قمت بإدخال معلومات شركتك في التطبيق (مثل الاسم، العنوان، رقم الهاتف، البريد الإلكتروني، مسار الشعار، مسار التوقيع، مسار الختم)، فإن هذه المعلومات يتم تخزينها محليًا على جهازك وقد يتم مزامنتها مع Firestore (قاعدة بيانات سحابية) لغرض النسخ الاحتياطي والمزامنة بين أجهزتك.</span></li>
+                <li><strong id="section1-1-li3-title">معلومات إنشاء عروض الأسعار:</strong> <span id="section1-1-li3-desc">يتم تخزين جميع البيانات المتعلقة بإنشاء عروض الأسعار التي تنشئها (مثل اسم العميل، رقم عرض السعر، تاريخ عرض السعر، تفاصيل الأصناف، الكميات، الأسعار، العملات) محليًا على جهازك وقد يتم مزامنتها مع Firestore.</span></li>
+            </ul>
+            
+            <h3 id="section1-2-title">1.2. المعلومات التي نجمعها تلقائيًا</h3>
+            <p id="section1-2-desc">عند استخدامك للتطبيق، قد نجمع بعض المعلومات تلقائيًا:</p>
+            <ul>
+                <li><strong id="section1-2-li1-title">معلومات الجهاز:</strong> <span id="section1-2-li1-desc">نجمع معلومات حول جهازك، مثل اسم الجهاز، طراز الجهاز، ومعرف الجهاز الفريد. هذه المعلومات ضرورية لإدارة الترخيص وتطبيق قيود عدد الأجهزة لكل حساب.</span></li>
+                <li><strong id="section1-2-li2-title">بيانات الاستخدام:</strong> <span id="section1-2-li2-desc">نجمع معلومات حول كيفية تفاعلك مع التطبيق، مثل عدد إنشاء عروض الأسعار التي تم إنشاؤها، والميزات المستخدمة، وتكرار الاستخدام. هذه البيانات تساعدنا في تحسين أداء التطبيق وتجربة المستخدم.</span></li>
+                <li><strong id="section1-2-li3-title">رموز FCM (Firebase Cloud Messaging):</strong> <span id="section1-2-li3-desc">عند تثبيت التطبيق، يتم إنشاء رمز FCM فريد لجهازك. نستخدم هذا الرمز لإرسال إشعارات إليك. يتم تخزين هذا الرمز في Firestore وربطه بحساب المستخدم الخاص بك.</span></li>
+                <li><strong id="section1-2-li4-title">بيانات الإعلانات:</strong> <span id="section1-2-li4-desc">إذا قمت بمشاهدة إعلانات مكافأة داخل التطبيق، فقد يتم جمع بيانات الاستخدام المتعلقة بتفاعلك مع هذه الإعلانات بواسطة مزودي الإعلانات (مثل Google AdMob). هذه البيانات لا تتضمن معلومات شخصية مباشرة، ولكنها قد تستخدم لتحسين استهداف الإعلانات.</span></li>
+            </ul>
+            
+            <h3 id="section1-3-title">1.3. معلومات من مصادر أخرى</h3>
+            <p id="section1-3-desc"><strong>Google Authentication:</strong> <span id="section1-3-desc2">نستخدم خدمة مصادقة Google لتسجيل الدخول، وبالتالي نعتمد على سياسة خصوصية Google فيما يتعلق بالمعلومات التي تجمعها Google أثناء عملية المصادقة.</span></p>
+            
+            <h2 id="section2-title">2. كيف نستخدم معلوماتك</h2>
+            <p id="section2-desc">نستخدم المعلومات التي نجمعها للأغراض التالية:</p>
+            <ul>
+                <li id="section2-li1"><strong>توفير وتشغيل التطبيق:</strong> <span>لتمكينك من استخدام جميع ميزات التطبيق، بما في ذلك إنشاء إنشاء عروض الأسعار، وإدارة معلومات الشركة، وحفظ البيانات.</span></li>
+                <li id="section2-li2"><strong>إدارة الحساب والترخيص:</strong> <span>لإدارة حسابك، وتطبيق قيود الترخيص (مثل حد الجهازين لكل حساب مميز)، وتتبع حالة اشتراكك (مجاني/مميز).</span></li>
+                <li id="section2-li3"><strong>المزامنة والنسخ الاحتياطي:</strong> <span>لمزامنة بياناتك (معلومات الشركة وإنشاء عروض الأسعار) عبر أجهزتك المختلفة وتوفير نسخ احتياطية آمنة في Firestore.</span></li>
+                <li id="section2-li4"><strong>تحسين التطبيق:</strong> <span>لتحليل كيفية استخدام المستخدمين للتطبيق وتحديد المجالات التي يمكن تحسينها، مما يساعدنا في تطوير ميزات جديدة وتحسين الأداء.</span></li>
+                <li id="section2-li5"><strong>إرسال الإشعارات:</strong> <span>لإرسال إشعارات مهمة إليك بخصوص تحديثات التطبيق، أو ميزات جديدة، أو رسائل ترويجية (إذا وافقت على تلقيها).</span></li>
+                <li id="section2-li6"><strong>عرض الإعلانات:</strong> <span>لعرض إعلانات مكافأة داخل التطبيق، والتي تتيح لك الوصول إلى ميزات إضافية. يتم ذلك بالتعاون مع مزودي الإعلانات.</span></li>
+                <li id="section2-li7"><strong>الأمان ومنع الاحتيال:</strong> <span>لحماية التطبيق ومستخدميه من الأنشطة الاحتيالية أو غير المصرح بها.</span></li>
+                <li id="section2-li8"><strong>الامتثال القانوني:</strong> <span>للامتثال للمتطلبات القانونية والتنظيمية المعمول بها.</span></li>
+            </ul>
+            
+            <h2 id="section3-title">3. مشاركة معلوماتك</h2>
+            <p id="section3-desc">نحن لا نبيع أو نتاجر أو نؤجر معلوماتك الشخصية لأطراف ثالثة. قد نشارك معلوماتك في الحالات التالية:</p>
+            <ul>
+                <li id="section3-li1"><strong>مع مزودي الخدمة:</strong> <span>قد نشارك معلوماتك مع مزودي خدمة خارجيين يساعدوننا في تشغيل التطبيق أو تقديم الخدمات (مثل خدمات استضافة قاعدة البيانات، خدمات التحليلات، مزودي الإعلانات). يلتزم هؤلاء المزودون بحماية معلوماتك واستخدامها فقط للأغراض التي تم التعاقد معهم من أجلها.</span></li>
+                <li id="section3-li2"><strong>للامتثال القانوني:</strong> <span>قد نكشف عن معلوماتك إذا كان ذلك مطلوبًا بموجب القانون أو استجابة لطلب قانوني صالح (مثل أمر محكمة أو مذكرة تفتيش).</span></li>
+                <li id="section3-li3"><strong>لحماية حقوقنا:</strong> <span>قد نكشف عن معلوماتك لحماية حقوقنا أو ممتلكاتنا أو سلامة مستخدمينا أو الجمهور.</span></li>
+                <li id="section3-li4"><strong>في حالة نقل الأعمال:</strong> <span>في حالة الاندماج أو الاستحواذ أو بيع جميع أصولنا أو جزء منها، قد يتم نقل معلوماتك كجزء من تلك الصفقة. سنخطرك بأي تغيير في الملكية أو الاستخدام لمعلوماتك الشخصية.</span></li>
+            </ul>
+            
+            <h2 id="section4-title">4. أمان بياناتك</h2>
+            <p id="section4-desc">نحن نتخذ إجراءات أمنية معقولة لحماية معلوماتك الشخصية من الوصول غير المصرح به أو التغيير أو الكشف أو التدمير. تشمل هذه الإجراءات:</p>
+            <ul>
+                <li id="section4-li1"><strong>التشفير:</strong> <span>يتم تشفير بعض البيانات الحساسة، مثل معلومات الترخيص، لضمان أمانها.</span></li>
+                <li id="section4-li2"><strong>التحكم في الوصول:</strong> <span>يتم تقييد الوصول إلى معلوماتك الشخصية على الموظفين الذين يحتاجون إلى معرفة تلك المعلومات لأداء وظائفهم.</span></li>
+                <li id="section4-li3"><strong>تخزين البيانات:</strong> <span>يتم تخزين البيانات في بيئات آمنة، سواء محليًا على جهازك أو في Firestore، والتي توفر إجراءات أمنية قوية.</span></li>
+            </ul>
+            <p id="section4-desc2">على الرغم من أننا نبذل قصارى جهدنا لحماية معلوماتك، لا يوجد نظام أمان مثالي أو لا يمكن اختراقه. لذلك، لا يمكننا ضمان الأمان المطلق لمعلوماتك.</p>
+            
+            <h2 id="section5-title">5. خياراتك وحقوقك</h2>
+            <ul>
+                <li id="section5-li1"><strong>الوصول إلى بياناتك وتعديلها:</strong> <span>يمكنك الوصول إلى معلومات شركتك وإنشاء عروض الأسعار وتعديلها مباشرة داخل التطبيق.</span></li>
+                <li id="section5-li2"><strong>إدارة الأجهزة:</strong> <span>يمكنك إدارة الأجهزة المرتبطة بحسابك المميز من خلال DeviceManagementDialog داخل التطبيق.</span></li>
+                <li id="section5-li3"><strong>إلغاء الاشتراك في الإشعارات:</strong> <span>يمكنك إلغاء الاشتراك في تلقي الإشعارات من التطبيق في أي وقت من خلال إعدادات جهازك.</span></li>
+                <li id="section5-li4"><strong>حذف البيانات:</strong> <span>يمكنك حذف بياناتك من التطبيق عن طريق إلغاء تثبيت التطبيق من جهازك. يرجى ملاحظة أن بعض البيانات المخزنة في Firestore قد تتطلب خطوات إضافية للحذف الكامل، والتي يمكنك طلبها عن طريق الاتصال بنا.</span></li>
+            </ul>
+            
+            <h2 id="section6-title">6. خدمات الطرف الثالث</h2>
+            <p id="section6-desc">يستخدم التطبيق خدمات طرف ثالث، مثل Google Authentication و Google AdMob و Firebase. تخضع ممارسات الخصوصية لهذه الخدمات لسياسات الخصوصية الخاصة بها. نحن نشجعك على مراجعة سياسات الخصوصية الخاصة بهم لفهم كيفية جمعهم واستخدامهم لمعلوماتك.</p>
+            
+            <h2 id="section7-title">7. خصوصية الأطفال</h2>
+            <p id="section7-desc">التطبيق غير موجه للأطفال دون سن 13 عامًا. نحن لا نجمع عن قصد معلومات شخصية من الأطفال دون سن 13 عامًا. إذا علمت أن طفلك قد قدم لنا معلومات شخصية دون موافقتك، يرجى الاتصال بنا وسنتخذ خطوات لحذف هذه المعلومات من أنظمتنا.</p>
+            
+            <h2 id="section8-title">8. التغييرات على سياسة الخصوصية هذه</h2>
+            <p id="section8-desc">قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنخطرك بأي تغييرات عن طريق نشر سياسة الخصوصية الجديدة على هذه الصفحة وتحديث "تاريخ السريان" في الأعلى. ننصحك بمراجعة سياسة الخصوصية هذه بشكل دوري لأي تغييرات. تصبح التغييرات سارية المفعول عند نشرها على هذه الصفحة.</p>
+            
+            <div class="highlight">
+                <h2 id="section9-title">9. تفاصيل إضافية حول البيانات المجمعة</h2>
+                
+                <h3 id="section9-1-title">9.1. بيانات الترخيص والمصادقة</h3>
+                <p id="section9-1-desc">يستخدم التطبيق نظام ترخيص متقدم قائم على حساب Google، والذي يتضمن:</p>
+                <ul>
+                    <li id="section9-1-li1"><strong>الرمز الفريد للترخيص:</strong> <span>عند طلب الترخيص المميز، يتم إنشاء رمز فريد مرتبط بحساب Google الخاص بك. هذا الرمز يتم إرساله إلى المسؤول للموافقة عليه وإدراجه في القائمة البيضاء.</span></li>
+                    <li id="section9-1-li2"><strong>معلومات الجهاز المفصلة:</strong> <span>يتم تسجيل اسم الهاتف وطراز الجهاز ومعرف الجهاز الفريد لكل جهاز مصرح له بالوصول إلى الحساب المميز.</span></li>
+                    <li id="section9-1-li3"><strong>حد الأجهزة:</strong> <span>يتم تطبيق حد صارم يقتصر على جهازين لكل حساب مميز. إذا حاولت تسجيل الدخول من جهاز ثالث، ستظهر لك نافذة حوار لإدارة أجهزتك المسجلة.</span></li>
+                    <li id="section9-1-li4"><strong>تتبع حالة الحساب:</strong> <span>يتم إجراء فحص عبر الإنترنت لنوع الحساب (مجاني/مميز) في كل مرة يتم تشغيل التطبيق مع وجود اتصال بالإنترنت.</span></li>
+                </ul>
+                
+                <h3 id="section9-2-title">9.2. بيانات الاستخدام والإحصائيات</h3>
+                <ul>
+                    <li id="section9-2-li1"><strong>عدد إنشاء عروض الأسعار:</strong> <span>يتم تتبع عدد إنشاء عروض الأسعار التي تم إنشاؤها، خاصة للحسابات المجانية لتطبيق القيود المناسبة.</span></li>
+                    <li id="section9-2-li2"><strong>تكرار الاستخدام:</strong> <span>معلومات حول عدد مرات فتح التطبيق واستخدام الميزات المختلفة.</span></li>
+                    <li id="section9-2-li3"><strong>أداء التطبيق:</strong> <span>بيانات حول أوقات الاستجابة وأي أخطاء قد تحدث لتحسين الأداء.</span></li>
+                </ul>
+                
+                <h3 id="section9-3-title">9.3. بيانات الإعلانات والمكافآت</h3>
+                <ul>
+                    <li id="section9-3-li1"><strong>تفاعل الإعلانات:</strong> <span>عند مشاهدة إعلانات المكافأة، يتم تسجيل مدة المشاهدة واكتمال الإعلان لمنح المكافآت المناسبة.</span></li>
+                    <li id="section9-3-li2"><strong>معرفات الإعلانات:</strong> <span>قد يتم استخدام معرفات الإعلانات المقدمة من Google AdMob لتحسين استهداف الإعلانات.</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="contact-section">
+            <h0 id="contact-title">اتصل بمطور التطبيق</h0>
+            <p id="contact-desc">إذا كانت لديك أي استفسارات أو تحتاج إلى مساعدة بخصوص سياسة الخصوصية أو التطبيق، يرجى التواصل معنا عبر:</p>
+            
+            <div class="contact-info">
+                <div class="contact-item" onclick="location.href='mailto:salah22app@gmail.com?subject=استفسار حول سياسة الخصوصية';">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:salah22app@gmail.com?subject=استفسار حول سياسة الخصوصية">salah22app@gmail.com</a>
+                    <p id="email-click">انقر لفتح تطبيق البريد</p>
+                </div>
+                
+                <div class="contact-item" onclick="window.open('https://wa.me/967734249712?text=مرحباً، أريد الاستفسار عن تطبيق إنشاء عروض الأسعار', '_blank');">
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/967734249712?text=مرحباً، أريد الاستفسار عن تطبيق إنشاء عروض الأسعار" target="_blank">+967734249712</a>
+                    <p id="whatsapp-click">انقر للتواصل عبر واتساب</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p id="footer-text">© 2025 تطبيق إنشاء عروض الأسعار . جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ترجمات لكل اللغات
+        const translations = {
+            ar: {
+                // عناصر القائمة
+                "current-lang": "العربية",
+                
+                // الهيدر
+                "policy-title": "سياسة الخصوصية",
+                "policy-subtitle": "لتطبيق إنشاء عروض الأسعار",
+                
+                // المحتوى الرئيسي
+                "effective-date": "تاريخ السريان: 12 سبتمبر 2025",
+                "intro-text": "توضح سياسة الخصوصية هذه كيفية جمع واستخدام والكشف عن معلوماتك الشخصية عند استخدامك لتطبيق إنشاء عروض الأسعار (المشار إليه فيما بعد بـ 'التطبيق'). نحن نلتزم بحماية خصوصيتك ونقدر ثقتك بنا. يرجى قراءة هذه السياسة بعناية لفهم ممارساتنا المتعلقة ببياناتك.",
+                
+                // الأقسام
+                "section1-title": "1. المعلومات التي نجمعها",
+                "section1-1-title": "1.1. المعلومات التي تقدمها لنا مباشرةً",
+                "section1-1-desc": "عند استخدامك للتطبيق، قد نطلب منك تقديم معلومات شخصية معينة، والتي قد تشمل على سبيل المثال لا الحصر:",
+                "section1-1-li1-title": "معلومات الحساب:",
+                "section1-1-li1-desc": "عند تسجيل الدخول باستخدام حساب Google الخاص بك، نجمع عنوان بريدك الإلكتروني ومعرف المستخدم الخاص بك من Google. هذه المعلومات ضرورية لإدارة حسابك وتوفير ميزات الترخيص وإدارة الأجهزة.",
+                "section1-1-li2-title": "معلومات الشركة:",
+                "section1-1-li2-desc": "إذا قمت بإدخال معلومات شركتك في التطبيق (مثل الاسم، العنوان، رقم الهاتف، البريد الإلكتروني، مسار الشعار، مسار التوقيع، مسار الختم)، فإن هذه المعلومات يتم تخزينها محليًا على جهازك وقد يتم مزامنتها مع Firestore (قاعدة بيانات سحابية) لغرض النسخ الاحتياطي والمزامنة بين أجهزتك.",
+                "section1-1-li3-title": "معلومات إنشاء عروض الأسعار:",
+                "section1-1-li3-desc": "يتم تخزين جميع البيانات المتعلقة بإنشاء عروض الأسعار التي تنشئها (مثل اسم العميل، رقم عرض السعر، تاريخ عرض السعر، تفاصيل الأصناف، الكميات، الأسعار، العملات) محليًا على جهازك وقد يتم مزامنتها مع Firestore.",
+                
+                "section1-2-title": "1.2. المعلومات التي نجمعها تلقائيًا",
+                "section1-2-desc": "عند استخدامك للتطبيق، قد نجمع بعض المعلومات تلقائيًا:",
+                "section1-2-li1-title": "معلومات الجهاز:",
+                "section1-2-li1-desc": "نجمع معلومات حول جهازك، مثل اسم الجهاز، طراز الجهاز، ومعرف الجهاز الفريد. هذه المعلومات ضرورية لإدارة الترخيص وتطبيق قيود عدد الأجهزة لكل حساب.",
+                "section1-2-li2-title": "بيانات الاستخدام:",
+                "section1-2-li2-desc": "نجمع معلومات حول كيفية تفاعلك مع التطبيق، مثل عدد إنشاء عروض الأسعار التي تم إنشاؤها، والميزات المستخدمة، وتكرار الاستخدام. هذه البيانات تساعدنا في تحسين أداء التطبيق وتجربة المستخدم.",
+                "section1-2-li3-title": "رموز FCM (Firebase Cloud Messaging):",
+                "section1-2-li3-desc": "عند تثبيت التطبيق، يتم إنشاء رمز FCM فريد لجهازك. نستخدم هذا الرمز لإرسال إشعارات إليك. يتم تخزين هذا الرمز في Firestore وربطه بحساب المستخدم الخاص بك.",
+                "section1-2-li4-title": "بيانات الإعلانات:",
+                "section1-2-li4-desc": "إذا قمت بمشاهدة إعلانات مكافأة داخل التطبيق، فقد يتم جمع بيانات الاستخدام المتعلقة بتفاعلك مع هذه الإعلانات بواسطة مزودي الإعلانات (مثل Google AdMob). هذه البيانات لا تتضمن معلومات شخصية مباشرة، ولكنها قد تستخدم لتحسين استهداف الإعلانات.",
+                
+                "section1-3-title": "1.3. معلومات من مصادر أخرى",
+                "section1-3-desc2": "نستخدم خدمة مصادقة Google لتسجيل الدخول، وبالتالي نعتمد على سياسة خصوصية Google فيما يتعلق بالمعلومات التي تجمعها Google أثناء عملية المصادقة.",
+                
+                "section2-title": "2. كيف نستخدم معلوماتك",
+                "section2-desc": "نستخدم المعلومات التي نجمعها للأغراض التالية:",
+                "section2-li1": "<strong>توفير وتشغيل التطبيق:</strong> لتمكينك من استخدام جميع ميزات التطبيق، بما في ذلك إنشاء إنشاء عروض الأسعار، وإدارة معلومات الشركة، وحفظ البيانات.",
+                "section2-li2": "<strong>إدارة الحساب والترخيص:</strong> لإدارة حسابك، وتطبيق قيود الترخيص (مثل حد الجهازين لكل حساب مميز)، وتتبع حالة اشتراكك (مجاني/مميز).",
+                "section2-li3": "<strong>المزامنة والنسخ الاحتياطي:</strong> لمزامنة بياناتك (معلومات الشركة وإنشاء عروض الأسعار) عبر أجهزتك المختلفة وتوفير نسخ احتياطية آمنة في Firestore.",
+                "section2-li4": "<strong>تحسين التطبيق:</strong> لتحليل كيفية استخدام المستخدمين للتطبيق وتحديد المجالات التي يمكن تحسينها، مما يساعدنا في تطوير ميزات جديدة وتحسين الأداء.",
+                "section2-li5": "<strong>إرسال الإشعارات:</strong> لإرسال إشعارات مهمة إليك بخصوص تحديثات التطبيق، أو ميزات جديدة، أو رسائل ترويجية (إذا وافقت على تلقيها).",
+                "section2-li6": "<strong>عرض الإعلانات:</strong> لعرض إعلانات مكافأة داخل التطبيق، والتي تتيح لك الوصول إلى ميزات إضافية. يتم ذلك بالتعاون مع مزودي الإعلانات.",
+                "section2-li7": "<strong>الأمان ومنع الاحتيال:</strong> لحماية التطبيق ومستخدميه من الأنشطة الاحتيالية أو غير المصرح بها.",
+                "section2-li8": "<strong>الامتثال القانوني:</strong> للامتثال للمتطلبات القانونية والتنظيمية المعمول بها.",
+                
+                "section3-title": "3. مشاركة معلوماتك",
+                "section3-desc": "نحن لا نبيع أو نتاجر أو نؤجر معلوماتك الشخصية لأطراف ثالثة. قد نشارك معلوماتك في الحالات التالية:",
+                "section3-li1": "<strong>مع مزودي الخدمة:</strong> قد نشارك معلوماتك مع مزودي خدمة خارجيين يساعدوننا في تشغيل التطبيق أو تقديم الخدمات (مثل خدمات استضافة قاعدة البيانات، خدمات التحليلات، مزودي الإعلانات). يلتزم هؤلاء المزودون بحماية معلوماتك واستخدامها فقط للأغراض التي تم التعاقد معهم من أجلها.",
+                "section3-li2": "<strong>للامتثال القانوني:</strong> قد نكشف عن معلوماتك إذا كان ذلك مطلوبًا بموجب القانون أو استجابة لطلب قانوني صالح (مثل أمر محكمة أو مذكرة تفتيش).",
+                "section3-li3": "<strong>لحماية حقوقنا:</strong> قد نكشف عن معلوماتك لحماية حقوقنا أو ممتلكاتنا أو سلامة مستخدمينا أو الجمهور.",
+                "section3-li4": "<strong>في حالة نقل الأعمال:</strong> في حالة الاندماج أو الاستحواذ أو بيع جميع أصولنا أو جزء منها، قد يتم نقل معلوماتك كجزء من تلك الصفقة. سنخطرك بأي تغيير في الملكية أو الاستخدام لمعلوماتك الشخصية.",
+                
+                "section4-title": "4. أمان بياناتك",
+                "section4-desc": "نحن نتخذ إجراءات أمنية معقولة لحماية معلوماتك الشخصية من الوصول غير المصرح به أو التغيير أو الكشف أو التدمير. تشمل هذه الإجراءات:",
+                "section4-li1": "<strong>التشفير:</strong> يتم تشفير بعض البيانات الحساسة، مثل معلومات الترخيص، لضمان أمانها.",
+                "section4-li2": "<strong>التحكم في الوصول:</strong> يتم تقييد الوصول إلى معلوماتك الشخصية على الموظفين الذين يحتاجون إلى معرفة تلك المعلومات لأداء وظائفهم.",
+                "section4-li3": "<strong>تخزين البيانات:</strong> يتم تخزين البيانات في بيئات آمنة، سواء محليًا على جهازك أو في Firestore، والتي توفر إجراءات أمنية قوية.",
+                "section4-desc2": "على الرغم من أننا نبذل قصارى جهدنا لحماية معلوماتك، لا يوجد نظام أمان مثالي أو لا يمكن اختراقه. لذلك، لا يمكننا ضمان الأمان المطلق لمعلوماتك.",
+                
+                "section5-title": "5. خياراتك وحقوقك",
+                "section5-li1": "<strong>الوصول إلى بياناتك وتعديلها:</strong> يمكنك الوصول إلى معلومات شركتك وإنشاء عروض الأسعار وتعديلها مباشرة داخل التطبيق.",
+                "section5-li2": "<strong>إدارة الأجهزة:</strong> يمكنك إدارة الأجهزة المرتبطة بحسابك المميز من خلال DeviceManagementDialog داخل التطبيق.",
+                "section5-li3": "<strong>إلغاء الاشتراك في الإشعارات:</strong> يمكنك إلغاء الاشتراك في تلقي الإشعارات من التطبيق في أي وقت من خلال إعدادات جهازك.",
+                "section5-li4": "<strong>حذف البيانات:</strong> يمكنك حذف بياناتك من التطبيق عن طريق إلغاء تثبيت التطبيق من جهازك. يرجى ملاحظة أن بعض البيانات المخزنة في Firestore قد تتطلب خطوات إضافية للحذف الكامل، والتي يمكنك طلبها عن طريق الاتصال بنا.",
+                
+                "section6-title": "6. خدمات الطرف الثالث",
+                "section6-desc": "يستخدم التطبيق خدمات طرف ثالث، مثل Google Authentication و Google AdMob و Firebase. تخضع ممارسات الخصوصية لهذه الخدمات لسياسات الخصوصية الخاصة بها. نحن نشجعك على مراجعة سياسات الخصوصية الخاصة بهم لفهم كيفية جمعهم واستخدامهم لمعلوماتك.",
+                
+                "section7-title": "7. خصوصية الأطفال",
+                "section7-desc": "التطبيق غير موجه للأطفال دون سن 13 عامًا. نحن لا نجمع عن قصد معلومات شخصية من الأطفال دون سن 13 عامًا. إذا علمت أن طفلك قد قدم لنا معلومات شخصية دون موافقتك، يرجى الاتصال بنا وسنتخذ خطوات لحذف هذه المعلومات من أنظمتنا.",
+                
+                "section8-title": "8. التغييرات على سياسة الخصوصية هذه",
+                "section8-desc": "قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنخطرك بأي تغييرات عن طريق نشر سياسة الخصوصية الجديدة على هذه الصفحة وتحديث 'تاريخ السريان' في الأعلى. ننصحك بمراجعة سياسة الخصوصية هذه بشكل دوري لأي تغييرات. تصبح التغييرات سارية المفعول عند نشرها على هذه الصفحة.",
+                
+                "section9-title": "9. تفاصيل إضافية حول البيانات المجمعة",
+                "section9-1-title": "9.1. بيانات الترخيص والمصادقة",
+                "section9-1-desc": "يستخدم التطبيق نظام ترخيص متقدم قائم على حساب Google، والذي يتضمن:",
+                "section9-1-li1": "<strong>الرمز الفريد للترخيص:</strong> عند طلب الترخيص المميز، يتم إنشاء رمز فريد مرتبط بحساب Google الخاص بك. هذا الرمز يتم إرساله إلى المسؤول للموافقة عليه وإدراجه في القائمة البيضاء.",
+                "section9-1-li2": "<strong>معلومات الجهاز المفصلة:</strong> يتم تسجيل اسم الهاتف وطراز الجهاز ومعرف الجهاز الفريد لكل جهاز مصرح له بالوصول إلى الحساب المميز.",
+                "section9-1-li3": "<strong>حد الأجهزة:</strong> يتم تطبيق حد صارم يقتصر على جهازين لكل حساب مميز. إذا حاولت تسجيل الدخول من جهاز ثالث، ستظهر لك نافذة حوار لإدارة أجهزتك المسجلة.",
+                "section9-1-li4": "<strong>تتبع حالة الحساب:</strong> يتم إجراء فحص عبر الإنترنت لنوع الحساب (مجاني/مميز) في كل مرة يتم تشغيل التطبيق مع وجود اتصال بالإنترنت.",
+                
+                "section9-2-title": "9.2. بيانات الاستخدام والإحصائيات",
+                "section9-2-li1": "<strong>عدد إنشاء عروض الأسعار:</strong> يتم تتبع عدد إنشاء عروض الأسعار التي تم إنشاؤها، خاصة للحسابات المجانية لتطبيق القيود المناسبة.",
+                "section9-2-li2": "<strong>تكرار الاستخدام:</strong> معلومات حول عدد مرات فتح التطبيق واستخدام الميزات المختلفة.",
+                "section9-2-li3": "<strong>أداء التطبيق:</strong> بيانات حول أوقات الاستجابة وأي أخطاء قد تحدث لتحسين الأداء.",
+                
+                "section9-3-title": "9.3. بيانات الإعلانات والمكافآت",
+                "section9-3-li1": "<strong>تفاعل الإعلانات:</strong> عند مشاهدة إعلانات المكافأة، يتم تسجيل مدة المشاهدة واكتمال الإعلان لمنح المكافآت المناسبة.",
+                "section9-3-li2": "<strong>معرفات الإعلانات:</strong> قد يتم استخدام معرفات الإعلانات المقدمة من Google AdMob لتحسين استهداف الإعلانات.",
+                
+                // قسم الاتصال
+                "contact-title": "اتصل بمطور التطبيق",
+                "contact-desc": "إذا كانت لديك أي استفسارات أو تحتاج إلى مساعدة بخصوص سياسة الخصوصية أو التطبيق، يرجى التواصل معنا عبر:",
+                "email-click": "انقر لفتح تطبيق البريد",
+                "whatsapp-click": "انقر للتواصل عبر واتساب",
+                
+                // الفوتر
+                "footer-text": "© 2025 تطبيق إنشاء عروض الأسعار . جميع الحقوق محفوظة."
+            },
+            en: {
+                "current-lang": "English",
+                "policy-title": "Privacy Policy",
+                "policy-subtitle": "For Quotation Creation App",
+                "effective-date": "Effective Date: September 12, 2025",
+                "intro-text": "This Privacy Policy explains how we collect, use, and disclose your personal information when you use the Quotation Creation application (hereinafter referred to as the 'App'). We are committed to protecting your privacy and value your trust. Please read this policy carefully to understand our practices regarding your data.",
+                
+                "section1-title": "1. Information We Collect",
+                "section1-1-title": "1.1. Information You Provide Directly",
+                "section1-1-desc": "When you use the App, we may ask you to provide certain personal information, which may include but is not limited to:",
+                "section1-1-li1-title": "Account Information:",
+                "section1-1-li1-desc": "When logging in with your Google account, we collect your email address and user ID from Google. This information is necessary to manage your account and provide licensing features and device management.",
+                "section1-1-li2-title": "Company Information:",
+                "section1-1-li2-desc": "If you enter your company information in the App (such as name, address, phone number, email, logo path, signature path, stamp path), this information is stored locally on your device and may be synced with Firestore (a cloud database) for backup and synchronization across your devices.",
+                "section1-1-li3-title": "Quotation Creation Information:",
+                "section1-1-li3-desc": "All data related to the quotations you create (such as customer name, quotation number, quotation date, item details, quantities, prices, currencies) is stored locally on your device and may be synced with Firestore.",
+                
+                "section1-2-title": "1.2. Information Collected Automatically",
+                "section1-2-desc": "When you use the App, we may automatically collect some information:",
+                "section1-2-li1-title": "Device Information:",
+                "section1-2-li1-desc": "We collect information about your device, such as device name, model, and unique device identifier. This information is necessary for license management and applying device limits per account.",
+                "section1-2-li2-title": "Usage Data:",
+                "section1-2-li2-desc": "We collect information about how you interact with the App, such as the number of quotations created, features used, and frequency of use. This data helps us improve App performance and user experience.",
+                "section1-2-li3-title": "FCM Tokens (Firebase Cloud Messaging):",
+                "section1-2-li3-desc": "When you install the App, a unique FCM token is generated for your device. We use this token to send notifications to you. This token is stored in Firestore and linked to your user account.",
+                "section1-2-li4-title": "Advertising Data:",
+                "section1-2-li4-desc": "If you watch reward ads within the App, usage data related to your interaction with these ads may be collected by advertising providers (such as Google AdMob). This data does not include direct personal information but may be used to improve ad targeting.",
+                
+                "section1-3-title": "1.3. Information from Other Sources",
+                "section1-3-desc2": "We use Google Authentication for login, and therefore we rely on Google's privacy policy regarding the information Google collects during the authentication process.",
+                
+                "section2-title": "2. How We Use Your Information",
+                "section2-desc": "We use the information we collect for the following purposes:",
+                "section2-li1": "<strong>Providing and Operating the App:</strong> To enable you to use all App features, including creating quotations, managing company information, and saving data.",
+                "section2-li2": "<strong>Account and License Management:</strong> To manage your account, apply license restrictions (such as the two-device limit for premium accounts), and track your subscription status (free/premium).",
+                "section2-li3": "<strong>Synchronization and Backup:</strong> To synchronize your data (company information and quotations) across your different devices and provide secure backups in Firestore.",
+                "section2-li4": "<strong>App Improvement:</strong> To analyze how users use the App and identify areas for improvement, helping us develop new features and enhance performance.",
+                "section2-li5": "<strong>Sending Notifications:</strong> To send you important notifications regarding App updates, new features, or promotional messages (if you consent to receive them).",
+                "section2-li6": "<strong>Displaying Ads:</strong> To display reward ads within the App, which grant you access to additional features. This is done in cooperation with advertising providers.",
+                "section2-li7": "<strong>Security and Fraud Prevention:</strong> To protect the App and its users from fraudulent or unauthorized activities.",
+                "section2-li8": "<strong>Legal Compliance:</strong> To comply with applicable legal and regulatory requirements.",
+                
+                "section3-title": "3. Sharing Your Information",
+                "section3-desc": "We do not sell, trade, or rent your personal information to third parties. We may share your information in the following cases:",
+                "section3-li1": "<strong>With Service Providers:</strong> We may share your information with external service providers who help us operate the App or provide services (such as database hosting services, analytics services, advertising providers). These providers are committed to protecting your information and using it only for the purposes we've contracted them for.",
+                "section3-li2": "<strong>For Legal Compliance:</strong> We may disclose your information if required by law or in response to a valid legal request (such as a court order or search warrant).",
+                "section3-li3": "<strong>To Protect Our Rights:</strong> We may disclose your information to protect our rights, property, or the safety of our users or the public.",
+                "section3-li4": "<strong>In Business Transfers:</strong> In the event of a merger, acquisition, or sale of all or part of our assets, your information may be transferred as part of that transaction. We will notify you of any changes in ownership or use of your personal information.",
+                
+                "section4-title": "4. Data Security",
+                "section4-desc": "We take reasonable security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. These measures include:",
+                "section4-li1": "<strong>Encryption:</strong> Some sensitive data, such as license information, is encrypted to ensure its security.",
+                "section4-li2": "<strong>Access Control:</strong> Access to your personal information is restricted to employees who need to know that information to perform their functions.",
+                "section4-li3": "<strong>Data Storage:</strong> Data is stored in secure environments, either locally on your device or in Firestore, which provides strong security measures.",
+                "section4-desc2": "Although we do our best to protect your information, no security system is perfect or impenetrable. Therefore, we cannot guarantee absolute security of your information.",
+                
+                "section5-title": "5. Your Choices and Rights",
+                "section5-li1": "<strong>Access and Modify Your Data:</strong> You can access and modify your company information and quotations directly within the App.",
+                "section5-li2": "<strong>Device Management:</strong> You can manage devices associated with your premium account through DeviceManagementDialog within the App.",
+                "section5-li3": "<strong>Unsubscribe from Notifications:</strong> You can unsubscribe from receiving notifications from the App at any time through your device settings.",
+                "section5-li4": "<strong>Delete Data:</strong> You can delete your data from the App by uninstalling the App from your device. Please note that some data stored in Firestore may require additional steps for complete deletion, which you can request by contacting us.",
+                
+                "section6-title": "6. Third-Party Services",
+                "section6-desc": "The App uses third-party services, such as Google Authentication, Google AdMob, and Firebase. The privacy practices of these services are subject to their own privacy policies. We encourage you to review their privacy policies to understand how they collect and use your information.",
+                
+                "section7-title": "7. Children's Privacy",
+                "section7-desc": "The App is not directed at children under 13 years of age. We do not knowingly collect personal information from children under 13. If you learn that your child has provided us with personal information without your consent, please contact us and we will take steps to delete this information from our systems.",
+                
+                "section8-title": "8. Changes to This Privacy Policy",
+                "section8-desc": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the 'Effective Date' at the top. We advise you to review this Privacy Policy periodically for any changes. Changes become effective when they are posted on this page.",
+                
+                "section9-title": "9. Additional Details About Collected Data",
+                "section9-1-title": "9.1. License and Authentication Data",
+                "section9-1-desc": "The App uses an advanced license system based on Google account, which includes:",
+                "section9-1-li1": "<strong>Unique License Code:</strong> When requesting a premium license, a unique code associated with your Google account is generated. This code is sent to the administrator for approval and whitelisting.",
+                "section9-1-li2": "<strong>Detailed Device Information:</strong> The phone name, device model, and unique device identifier are recorded for each device authorized to access the premium account.",
+                "section9-1-li3": "<strong>Device Limit:</strong> A strict limit of two devices per premium account is enforced. If you try to log in from a third device, a dialog will appear to manage your registered devices.",
+                "section9-1-li4": "<strong>Account Status Tracking:</strong> An online check of account type (free/premium) is performed each time the App is launched with an internet connection.",
+                
+                "section9-2-title": "9.2. Usage and Statistics Data",
+                "section9-2-li1": "<strong>Number of Quotations:</strong> The number of quotations created is tracked, especially for free accounts to apply appropriate restrictions.",
+                "section9-2-li2": "<strong>Usage Frequency:</strong> Information about how often the App is opened and different features are used.",
+                "section9-2-li3": "<strong>App Performance:</strong> Data about response times and any errors that may occur to improve performance.",
+                
+                "section9-3-title": "9.3. Advertising and Rewards Data",
+                "section9-3-li1": "<strong>Ad Interaction:</strong> When watching reward ads, viewing duration and ad completion are recorded to grant appropriate rewards.",
+                "section9-3-li2": "<strong>Ad Identifiers:</strong> Ad identifiers provided by Google AdMob may be used to improve ad targeting.",
+                
+                "contact-title": "Contact the App Developer",
+                "contact-desc": "If you have any inquiries or need assistance regarding the privacy policy or the App, please contact us via:",
+                "email-click": "Click to open email app",
+                "whatsapp-click": "Click to contact via WhatsApp",
+                
+                "footer-text": "© 2025 Quotation Creation App. All rights reserved."
+            },
+            fr: {
+    "current-lang": "Français",
+    "policy-title": "Politique de Confidentialité",
+    "policy-subtitle": "Pour l'Application de Création de Devis",
+    "effective-date": "Date d'Effet : 12 Septembre 2025",
+    "intro-text": "Cette Politique de Confidentialité explique comment nous collectons, utilisons et divulguons vos informations personnelles lorsque vous utilisez l'application de création de devis (ci-après dénommée 'l'Application'). Nous nous engageons à protéger votre vie privée et apprécions votre confiance. Veuillez lire attentivement cette politique pour comprendre nos pratiques concernant vos données.",
+    
+    "section1-title": "1. Informations que nous collectons",
+    "section1-1-title": "1.1. Informations que vous nous fournissez directement",
+    "section1-1-desc": "Lorsque vous utilisez l'Application, nous pouvons vous demander de fournir certaines informations personnelles, qui peuvent inclure sans s'y limiter :",
+    "section1-1-li1-title": "Informations de compte :",
+    "section1-1-li1-desc": "Lors de la connexion avec votre compte Google, nous collectons votre adresse e-mail et votre identifiant utilisateur de Google. Ces informations sont nécessaires pour gérer votre compte et fournir les fonctionnalités de licence et de gestion des appareils.",
+    "section1-1-li2-title": "Informations de l'entreprise :",
+    "section1-1-li2-desc": "Si vous saisissez les informations de votre entreprise dans l'Application (comme le nom, l'adresse, le numéro de téléphone, l'e-mail, le chemin du logo, le chemin de la signature, le chemin du tampon), ces informations sont stockées localement sur votre appareil et peuvent être synchronisées avec Firestore (une base de données cloud) pour la sauvegarde et la synchronisation entre vos appareils.",
+    "section1-1-li3-title": "Informations de création de devis :",
+    "section1-1-li3-desc": "Toutes les données relatives aux devis que vous créez (comme le nom du client, le numéro de devis, la date du devis, les détails des articles, les quantités, les prix, les devises) sont stockées localement sur votre appareil et peuvent être synchronisées avec Firestore.",
+    
+    "section1-2-title": "1.2. Informations collectées automatiquement",
+    "section1-2-desc": "Lorsque vous utilisez l'Application, nous pouvons collecter automatiquement certaines informations :",
+    "section1-2-li1-title": "Informations sur l'appareil :",
+    "section1-2-li1-desc": "Nous collectons des informations sur votre appareil, telles que le nom de l'appareil, le modèle et l'identifiant unique de l'appareil. Ces informations sont nécessaires pour la gestion des licences et l'application des limites d'appareils par compte.",
+    "section1-2-li2-title": "Données d'utilisation :",
+    "section1-2-li2-desc": "Nous collectons des informations sur la façon dont vous interagissez avec l'Application, comme le nombre de devis créés, les fonctionnalités utilisées et la fréquence d'utilisation. Ces données nous aident à améliorer les performances de l'Application et l'expérience utilisateur.",
+    "section1-2-li3-title": "Jetons FCM (Firebase Cloud Messaging) :",
+    "section1-2-li3-desc": "Lorsque vous installez l'Application, un jeton FCM unique est généré pour votre appareil. Nous utilisons ce jeton pour vous envoyer des notifications. Ce jeton est stocké dans Firestore et lié à votre compte utilisateur.",
+    "section1-2-li4-title": "Données publicitaires :",
+    "section1-2-li4-desc": "Si vous regardez des annonces récompensées dans l'Application, les données d'utilisation relatives à votre interaction avec ces annonces peuvent être collectées par les fournisseurs publicitaires (comme Google AdMob). Ces données n'incluent pas d'informations personnelles directes mais peuvent être utilisées pour améliorer le ciblage des annonces.",
+    
+    "section1-3-title": "1.3. Informations provenant d'autres sources",
+    "section1-3-desc2": "Nous utilisons l'authentification Google pour la connexion, et nous nous appuyons donc sur la politique de confidentialité de Google concernant les informations que Google collecte pendant le processus d'authentification.",
+    
+    "section2-title": "2. Comment nous utilisons vos informations",
+    "section2-desc": "Nous utilisons les informations que nous collectons aux fins suivantes :",
+    "section2-li1": "<strong>Fournir et exploiter l'Application :</strong> Pour vous permettre d'utiliser toutes les fonctionnalités de l'Application, y compris la création de devis, la gestion des informations de l'entreprise et la sauvegarde des données.",
+    "section2-li2": "<strong>Gestion du compte et des licences :</strong> Pour gérer votre compte, appliquer les restrictions de licence (comme la limite de deux appareils pour les comptes premium) et suivre l'état de votre abonnement (gratuit/premium).",
+    "section2-li3": "<strong>Synchronisation et sauvegarde :</strong> Pour synchroniser vos données (informations de l'entreprise et devis) sur vos différents appareils et fournir des sauvegardes sécurisées dans Firestore.",
+    "section2-li4": "<strong>Amélioration de l'Application :</strong> Pour analyser comment les utilisateurs utilisent l'Application et identifier les domaines à améliorer, nous aidant à développer de nouvelles fonctionnalités et à améliorer les performances.",
+    "section2-li5": "<strong>Envoi de notifications :</strong> Pour vous envoyer des notifications importantes concernant les mises à jour de l'Application, les nouvelles fonctionnalités ou les messages promotionnels (si vous consentez à les recevoir).",
+    "section2-li6": "<strong>Affichage des annonces :</strong> Pour afficher des annonces récompensées dans l'Application, qui vous donnent accès à des fonctionnalités supplémentaires. Cela se fait en coopération avec les fournisseurs publicitaires.",
+    "section2-li7": "<strong>Sécurité et prévention de la fraude :</strong> Pour protéger l'Application et ses utilisateurs contre les activités frauduleuses ou non autorisées.",
+    "section2-li8": "<strong>Conformité légale :</strong> Pour se conformer aux exigences légales et réglementaires applicables.",
+    
+    "section3-title": "3. Partage de vos informations",
+    "section3-desc": "Nous ne vendons, n'échangeons ni ne louons vos informations personnelles à des tiers. Nous pouvons partager vos informations dans les cas suivants :",
+    "section3-li1": "<strong>Avec les fournisseurs de services :</strong> Nous pouvons partager vos informations avec des fournisseurs de services externes qui nous aident à exploiter l'Application ou à fournir des services (tels que les services d'hébergement de bases de données, les services d'analyse, les fournisseurs publicitaires). Ces fournisseurs s'engagent à protéger vos informations et à les utiliser uniquement aux fins pour lesquelles nous les avons contractés.",
+    "section3-li2": "<strong>Pour la conformité légale :</strong> Nous pouvons divulguer vos informations si la loi l'exige ou en réponse à une demande légale valide (comme une ordonnance du tribunal ou un mandat de perquisition).",
+    "section3-li3": "<strong>Pour protéger nos droits :</strong> Nous pouvons divulguer vos informations pour protéger nos droits, notre propriété ou la sécurité de nos utilisateurs ou du public.",
+    "section3-li4": "<strong>En cas de transfert d'entreprise :</strong> En cas de fusion, d'acquisition ou de vente de tout ou partie de nos actifs, vos informations peuvent être transférées dans le cadre de cette transaction. Nous vous informerons de tout changement de propriété ou d'utilisation de vos informations personnelles.",
+    
+    "section4-title": "4. Sécurité de vos données",
+    "section4-desc": "Nous prenons des mesures de sécurité raisonnables pour protéger vos informations personnelles contre l'accès, la modification, la divulgation ou la destruction non autorisés. Ces mesures incluent :",
+    "section4-li1": "<strong>Chiffrement :</strong> Certaines données sensibles, comme les informations de licence, sont chiffrées pour garantir leur sécurité.",
+    "section4-li2": "<strong>Contrôle d'accès :</strong> L'accès à vos informations personnelles est limité aux employés qui ont besoin de connaître ces informations pour exercer leurs fonctions.",
+    "section4-li3": "<strong>Stockage des données :</strong> Les données sont stockées dans des environnements sécurisés, soit localement sur votre appareil, soit dans Firestore, qui fournit des mesures de sécurité solides.",
+    "section4-desc2": "Bien que nous fassions de notre mieux pour protéger vos informations, aucun système de sécurité n'est parfait ou impénétrable. Par conséquent, nous ne pouvons pas garantir la sécurité absolue de vos informations.",
+    
+    "section5-title": "5. Vos choix et droits",
+    "section5-li1": "<strong>Accéder et modifier vos données :</strong> Vous pouvez accéder et modifier les informations de votre entreprise et les devis directement dans l'Application.",
+    "section5-li2": "<strong>Gestion des appareils :</strong> Vous pouvez gérer les appareils associés à votre compte premium via DeviceManagementDialog dans l'Application.",
+    "section5-li3": "<strong>Se désabonner des notifications :</strong> Vous pouvez vous désabonner de la réception des notifications de l'Application à tout moment via les paramètres de votre appareil.",
+    "section5-li4": "<strong>Supprimer les données :</strong> Vous pouvez supprimer vos données de l'Application en désinstallant l'Application de votre appareil. Veuillez noter que certaines données stockées dans Firestore peuvent nécessiter des étapes supplémentaires pour une suppression complète, que vous pouvez demander en nous contactant.",
+    
+    "section6-title": "6. Services tiers",
+    "section6-desc": "L'Application utilise des services tiers, tels que Google Authentication, Google AdMob et Firebase. Les pratiques de confidentialité de ces services sont soumises à leurs propres politiques de confidentialité. Nous vous encourageons à consulter leurs politiques de confidentialité pour comprendre comment ils collectent et utilisent vos informations.",
+    
+    "section7-title": "7. Confidentialité des enfants",
+    "section7-desc": "L'Application n'est pas destinée aux enfants de moins de 13 ans. Nous ne collectons pas sciemment d'informations personnelles auprès d'enfants de moins de 13 ans. Si vous apprenez que votre enfant nous a fourni des informations personnelles sans votre consentement, veuillez nous contacter et nous prendrons des mesures pour supprimer ces informations de nos systèmes.",
+    
+    "section8-title": "8. Modifications de cette politique de confidentialité",
+    "section8-desc": "Nous pouvons mettre à jour cette Politique de Confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle Politique de Confidentialité sur cette page et en mettant à jour la 'Date d'Effet' en haut. Nous vous conseillons de consulter périodiquement cette Politique de Confidentialité pour tout changement. Les modifications prennent effet lorsqu'elles sont publiées sur cette page.",
+    
+    "section9-title": "9. Détails supplémentaires sur les données collectées",
+    "section9-1-title": "9.1. Données de licence et d'authentification",
+    "section9-1-desc": "L'Application utilise un système de licence avancé basé sur le compte Google, qui comprend :",
+    "section9-1-li1": "<strong>Code de licence unique :</strong> Lors de la demande d'une licence premium, un code unique associé à votre compte Google est généré. Ce code est envoyé à l'administrateur pour approbation et mise en liste blanche.",
+    "section9-1-li2": "<strong>Informations détaillées sur l'appareil :</strong> Le nom du téléphone, le modèle de l'appareil et l'identifiant unique de l'appareil sont enregistrés pour chaque appareil autorisé à accéder au compte premium.",
+    "section9-1-li3": "<strong>Limite d'appareils :</strong> Une limite stricte de deux appareils par compte premium est appliquée. Si vous essayez de vous connecter à partir d'un troisième appareil, une boîte de dialogue apparaîtra pour gérer vos appareils enregistrés.",
+    "section9-1-li4": "<strong>Suivi de l'état du compte :</strong> Une vérification en ligne du type de compte (gratuit/premium) est effectuée chaque fois que l'Application est lancée avec une connexion Internet.",
+    
+    "section9-2-title": "9.2. Données d'utilisation et de statistiques",
+    "section9-2-li1": "<strong>Nombre de devis :</strong> Le nombre de devis créés est suivi, en particulier pour les comptes gratuits afin d'appliquer les restrictions appropriées.",
+    "section9-2-li2": "<strong>Fréquence d'utilisation :</strong> Informations sur la fréquence d'ouverture de l'Application et l'utilisation des différentes fonctionnalités.",
+    "section9-2-li3": "<strong>Performances de l'Application :</strong> Données sur les temps de réponse et toute erreur pouvant survenir pour améliorer les performances.",
+    
+    "section9-3-title": "9.3. Données publicitaires et de récompenses",
+    "section9-3-li1": "<strong>Interaction avec les annonces :</strong> Lors du visionnage d'annonces récompensées, la durée de visionnage et l'achèvement de l'annonce sont enregistrés pour accorder les récompenses appropriées.",
+    "section9-3-li2": "<strong>Identifiants publicitaires :</strong> Les identifiants publicitaires fournis par Google AdMob peuvent être utilisés pour améliorer le ciblage des annonces.",
+    
+    "contact-title": "Contactez le Développeur de l'Application",
+    "contact-desc": "Si vous avez des questions ou besoin d'aide concernant la politique de confidentialité ou l'Application, veuillez nous contacter via :",
+    "email-click": "Cliquez pour ouvrir l'application de messagerie",
+    "whatsapp-click": "Cliquez pour contacter via WhatsApp",
+    
+    "footer-text": "© 2025 Application de Création de Devis. Tous droits réservés."
+},
+
+es: {
+    "current-lang": "Español",
+    "policy-title": "Política de Privacidad",
+    "policy-subtitle": "Para la Aplicación de Creación de Cotizaciones",
+    "effective-date": "Fecha de Entrada en Vigor: 12 de Septiembre de 2025",
+    "intro-text": "Esta Política de Privacidad explica cómo recopilamos, utilizamos y divulgamos su información personal cuando utiliza la aplicación de creación de cotizaciones (en adelante denominada 'la Aplicación'). Nos comprometemos a proteger su privacidad y valoramos su confianza. Por favor, lea esta política detenidamente para comprender nuestras prácticas con respecto a sus datos.",
+    
+    "section1-title": "1. Información que recopilamos",
+    "section1-1-title": "1.1. Información que usted nos proporciona directamente",
+    "section1-1-desc": "Cuando utiliza la Aplicación, podemos solicitarle que proporcione cierta información personal, que puede incluir, entre otros:",
+    "section1-1-li1-title": "Información de la cuenta:",
+    "section1-1-li1-desc": "Al iniciar sesión con su cuenta de Google, recopilamos su dirección de correo electrónico e ID de usuario de Google. Esta información es necesaria para administrar su cuenta y proporcionar funciones de licencia y gestión de dispositivos.",
+    "section1-1-li2-title": "Información de la empresa:",
+    "section1-1-li2-desc": "Si ingresa información de su empresa en la Aplicación (como nombre, dirección, número de teléfono, correo electrónico, ruta del logotipo, ruta de la firma, ruta del sello), esta información se almacena localmente en su dispositivo y puede sincronizarse con Firestore (una base de datos en la nube) para copias de seguridad y sincronización entre sus dispositivos.",
+    "section1-1-li3-title": "Información de creación de cotizaciones:",
+    "section1-1-li3-desc": "Todos los datos relacionados con las cotizaciones que crea (como nombre del cliente, número de cotización, fecha de cotización, detalles de artículos, cantidades, precios, monedas) se almacenan localmente en su dispositivo y pueden sincronizarse con Firestore.",
+    
+    "section1-2-title": "1.2. Información recopilada automáticamente",
+    "section1-2-desc": "Cuando utiliza la Aplicación, podemos recopilar automáticamente cierta información:",
+    "section1-2-li1-title": "Información del dispositivo:",
+    "section1-2-li1-desc": "Recopilamos información sobre su dispositivo, como nombre del dispositivo, modelo e identificador único del dispositivo. Esta información es necesaria para la gestión de licencias y la aplicación de límites de dispositivos por cuenta.",
+    "section1-2-li2-title": "Datos de uso:",
+    "section1-2-li2-desc": "Recopilamos información sobre cómo interactúa con la Aplicación, como el número de cotizaciones creadas, las funciones utilizadas y la frecuencia de uso. Estos datos nos ayudan a mejorar el rendimiento de la Aplicación y la experiencia del usuario.",
+    "section1-2-li3-title": "Tokens FCM (Firebase Cloud Messaging):",
+    "section1-2-li3-desc": "Cuando instala la Aplicación, se genera un token FCM único para su dispositivo. Usamos este token para enviarle notificaciones. Este token se almacena en Firestore y está vinculado a su cuenta de usuario.",
+    "section1-2-li4-title": "Datos publicitarios:",
+    "section1-2-li4-desc": "Si ve anuncios de recompensa dentro de la Aplicación, los datos de uso relacionados con su interacción con estos anuncios pueden ser recopilados por proveedores de publicidad (como Google AdMob). Estos datos no incluyen información personal directa, pero pueden usarse para mejorar la orientación de anuncios.",
+    
+    "section1-3-title": "1.3. Información de otras fuentes",
+    "section1-3-desc2": "Utilizamos la autenticación de Google para el inicio de sesión y, por lo tanto, confiamos en la política de privacidad de Google con respecto a la información que Google recopila durante el proceso de autenticación.",
+    
+    "section2-title": "2. Cómo utilizamos su información",
+    "section2-desc": "Utilizamos la información que recopilamos para los siguientes propósitos:",
+    "section2-li1": "<strong>Proporcionar y operar la Aplicación:</strong> Para permitirle utilizar todas las funciones de la Aplicación, incluida la creación de cotizaciones, la gestión de información de la empresa y el guardado de datos.",
+    "section2-li2": "<strong>Gestión de cuenta y licencias:</strong> Para administrar su cuenta, aplicar restricciones de licencia (como el límite de dos dispositivos para cuentas premium) y realizar un seguimiento del estado de su suscripción (gratuita/premium).",
+    "section2-li3": "<strong>Sincronización y copia de seguridad:</strong> Para sincronizar sus datos (información de la empresa y cotizaciones) en sus diferentes dispositivos y proporcionar copias de seguridad seguras en Firestore.",
+    "section2-li4": "<strong>Mejora de la Aplicación:</strong> Para analizar cómo los usuarios utilizan la Aplicación e identificar áreas de mejora, lo que nos ayuda a desarrollar nuevas funciones y mejorar el rendimiento.",
+    "section2-li5": "<strong>Envío de notificaciones:</strong> Para enviarle notificaciones importantes sobre actualizaciones de la Aplicación, nuevas funciones o mensajes promocionales (si acepta recibirlos).",
+    "section2-li6": "<strong>Mostrar anuncios:</strong> Para mostrar anuncios de recompensa dentro de la Aplicación, que le otorgan acceso a funciones adicionales. Esto se realiza en cooperación con proveedores de publicidad.",
+    "section2-li7": "<strong>Seguridad y prevención de fraudes:</strong> Para proteger la Aplicación y sus usuarios de actividades fraudulentas o no autorizadas.",
+    "section2-li8": "<strong>Cumplimiento legal:</strong> Para cumplir con los requisitos legales y reglamentarios aplicables.",
+    
+    "section3-title": "3. Compartir su información",
+    "section3-desc": "No vendemos, comerciamos ni alquilamos su información personal a terceros. Podemos compartir su información en los siguientes casos:",
+    "section3-li1": "<strong>Con proveedores de servicios:</strong> Podemos compartir su información con proveedores de servicios externos que nos ayudan a operar la Aplicación o proporcionar servicios (como servicios de alojamiento de bases de datos, servicios de análisis, proveedores de publicidad). Estos proveedores se comprometen a proteger su información y usarla solo para los fines para los que los hemos contratado.",
+    "section3-li2": "<strong>Para el cumplimiento legal:</strong> Podemos divulgar su información si lo requiere la ley o en respuesta a una solicitud legal válida (como una orden judicial o una orden de registro).",
+    "section3-li3": "<strong>Para proteger nuestros derechos:</strong> Podemos divulgar su información para proteger nuestros derechos, propiedad o la seguridad de nuestros usuarios o del público.",
+    "section3-li4": "<strong>En caso de transferencia de negocio:</strong> En caso de fusión, adquisición o venta de todos o parte de nuestros activos, su información puede transferirse como parte de esa transacción. Le notificaremos cualquier cambio en la propiedad o el uso de su información personal.",
+    
+    "section4-title": "4. Seguridad de sus datos",
+    "section4-desc": "Tomamos medidas de seguridad razonables para proteger su información personal contra el acceso, alteración, divulgación o destrucción no autorizados. Estas medidas incluyen:",
+    "section4-li1": "<strong>Cifrado:</strong> Algunos datos sensibles, como la información de licencia, se cifran para garantizar su seguridad.",
+    "section4-li2": "<strong>Control de acceso:</strong> El acceso a su información personal está restringido a los empleados que necesitan conocer esa información para realizar sus funciones.",
+    "section4-li3": "<strong>Almacenamiento de datos:</strong> Los datos se almacenan en entornos seguros, ya sea localmente en su dispositivo o en Firestore, que proporciona medidas de seguridad sólidas.",
+    "section4-desc2": "Aunque hacemos todo lo posible para proteger su información, ningún sistema de seguridad es perfecto o impenetrable. Por lo tanto, no podemos garantizar la seguridad absoluta de su información.",
+    
+    "section5-title": "5. Sus opciones y derechos",
+    "section5-li1": "<strong>Acceder y modificar sus datos:</strong> Puede acceder y modificar la información de su empresa y las cotizaciones directamente dentro de la Aplicación.",
+    "section5-li2": "<strong>Gestión de dispositivos:</strong> Puede gestionar los dispositivos asociados con su cuenta premium a través de DeviceManagementDialog dentro de la Aplicación.",
+    "section5-li3": "<strong>Cancelar la suscripción a las notificaciones:</strong> Puede cancelar la suscripción para recibir notificaciones de la Aplicación en cualquier momento a través de la configuración de su dispositivo.",
+    "section5-li4": "<strong>Eliminar datos:</strong> Puede eliminar sus datos de la Aplicación desinstalando la Aplicación de su dispositivo. Tenga en cuenta que algunos datos almacenados en Firestore pueden requerir pasos adicionales para su eliminación completa, que puede solicitar contactándonos.",
+    
+    "section6-title": "6. Servicios de terceros",
+    "section6-desc": "La Aplicación utiliza servicios de terceros, como Google Authentication, Google AdMob y Firebase. Las prácticas de privacidad de estos servicios están sujetas a sus propias políticas de privacidad. Le recomendamos que revise sus políticas de privacidad para comprender cómo recopilan y utilizan su información.",
+    
+    "section7-title": "7. Privacidad de los niños",
+    "section7-desc": "La Aplicación no está dirigida a niños menores de 13 años. No recopilamos intencionalmente información personal de niños menores de 13 años. Si se entera de que su hijo nos ha proporcionado información personal sin su consentimiento, contáctenos y tomaremos medidas para eliminar esta información de nuestros sistemas.",
+    
+    "section8-title": "8. Cambios en esta política de privacidad",
+    "section8-desc": "Podemos actualizar esta Política de Privacidad de vez en cuando. Le notificaremos cualquier cambio publicando la nueva Política de Privacidad en esta página y actualizando la 'Fecha de Entrada en Vigor' en la parte superior. Le recomendamos que revise periódicamente esta Política de Privacidad para cualquier cambio. Los cambios entran en vigor cuando se publican en esta página.",
+    
+    "section9-title": "9. Detalles adicionales sobre los datos recopilados",
+    "section9-1-title": "9.1. Datos de licencia y autenticación",
+    "section9-1-desc": "La Aplicación utiliza un sistema de licencia avanzado basado en la cuenta de Google, que incluye:",
+    "section9-1-li1": "<strong>Código de licencia único:</strong> Al solicitar una licencia premium, se genera un código único asociado con su cuenta de Google. Este código se envía al administrador para su aprobación e inclusión en la lista blanca.",
+    "section9-1-li2": "<strong>Información detallada del dispositivo:</strong> Se registran el nombre del teléfono, el modelo del dispositivo y el identificador único del dispositivo para cada dispositivo autorizado a acceder a la cuenta premium.",
+    "section9-1-li3": "<strong>Límite de dispositivos:</strong> Se aplica un límite estricto de dos dispositivos por cuenta premium. Si intenta iniciar sesión desde un tercer dispositivo, aparecerá un cuadro de diálogo para gestionar sus dispositivos registrados.",
+    "section9-1-li4": "<strong>Seguimiento del estado de la cuenta:</strong> Se realiza una verificación en línea del tipo de cuenta (gratuita/premium) cada vez que se inicia la Aplicación con conexión a Internet.",
+    
+    "section9-2-title": "9.2. Datos de uso y estadísticas",
+    "section9-2-li1": "<strong>Número de cotizaciones:</strong> Se realiza un seguimiento del número de cotizaciones creadas, especialmente para cuentas gratuitas para aplicar las restricciones adecuadas.",
+    "section9-2-li2": "<strong>Frecuencia de uso:</strong> Información sobre la frecuencia con la que se abre la Aplicación y se utilizan las diferentes funciones.",
+    "section9-2-li3": "<strong>Rendimiento de la Aplicación:</strong> Datos sobre los tiempos de respuesta y cualquier error que pueda ocurrir para mejorar el rendimiento.",
+    
+    "section9-3-title": "9.3. Datos publicitarios y de recompensas",
+    "section9-3-li1": "<strong>Interacción con anuncios:</strong> Al ver anuncios de recompensa, se registran la duración de visualización y la finalización del anuncio para otorgar las recompensas apropiadas.",
+    "section9-3-li2": "<strong>Identificadores publicitarios:</strong> Los identificadores publicitarios proporcionados por Google AdMob pueden usarse para mejorar la orientación de anuncios.",
+    
+    "contact-title": "Contacte al Desarrollador de la Aplicación",
+    "contact-desc": "Si tiene alguna consulta o necesita ayuda con respecto a la política de privacidad o la Aplicación, comuníquese con nosotros a través de:",
+    "email-click": "Haga clic para abrir la aplicación de correo",
+    "whatsapp-click": "Haga clic para contactar por WhatsApp",
+    
+    "footer-text": "© 2025 Aplicación de Creación de Cotizaciones. Todos los derechos reservados."
+},
+
+de: {
+    "current-lang": "Deutsch",
+    "policy-title": "Datenschutzrichtlinie",
+    "policy-subtitle": "Für die Angebotserstellungs-App",
+    "effective-date": "Datum des Inkrafttretens: 12. September 2025",
+    "intro-text": "Diese Datenschutzrichtlinie erklärt, wie wir Ihre persönlichen Informationen sammeln, verwenden und offenlegen, wenn Sie die Angebotserstellungs-App (im Folgenden als 'App' bezeichnet) verwenden. Wir verpflichten uns, Ihre Privatsphäre zu schützen und schätzen Ihr Vertrauen. Bitte lesen Sie diese Richtlinie sorgfältig, um unsere Praktiken in Bezug auf Ihre Daten zu verstehen.",
+    
+    "section1-title": "1. Informationen, die wir sammeln",
+    "section1-1-title": "1.1. Informationen, die Sie uns direkt zur Verfügung stellen",
+    "section1-1-desc": "Wenn Sie die App verwenden, können wir Sie auffordern, bestimmte persönliche Informationen anzugeben, die unter anderem Folgendes umfassen können:",
+    "section1-1-li1-title": "Kontoinformationen:",
+    "section1-1-li1-desc": "Bei der Anmeldung mit Ihrem Google-Konto erfassen wir Ihre E-Mail-Adresse und Ihre Benutzer-ID von Google. Diese Informationen sind notwendig, um Ihr Konto zu verwalten und Lizenzfunktionen sowie Geräteverwaltung bereitzustellen.",
+    "section1-1-li2-title": "Firmeninformationen:",
+    "section1-1-li2-desc": "Wenn Sie Informationen zu Ihrem Unternehmen in der App eingeben (wie Name, Adresse, Telefonnummer, E-Mail, Logo-Pfad, Unterschriften-Pfad, Stempel-Pfad), werden diese Informationen lokal auf Ihrem Gerät gespeichert und können mit Firestore (einer Cloud-Datenbank) zur Sicherung und Synchronisierung zwischen Ihren Geräten synchronisiert werden.",
+    "section1-1-li3-title": "Angebotserstellungsinformationen:",
+    "section1-1-li3-desc": "Alle Daten zu den von Ihnen erstellten Angeboten (wie Kundenname, Angebotsnummer, Angebotsdatum, Artikeldetails, Mengen, Preise, Währungen) werden lokal auf Ihrem Gerät gespeichert und können mit Firestore synchronisiert werden.",
+    
+    "section1-2-title": "1.2. Automatisch gesammelte Informationen",
+    "section1-2-desc": "Wenn Sie die App verwenden, können wir automatisch einige Informationen sammeln:",
+    "section1-2-li1-title": "Geräteinformationen:",
+    "section1-2-li1-desc": "Wir sammeln Informationen über Ihr Gerät, wie Gerätename, Modell und eindeutige Gerätekennung. Diese Informationen sind für die Lizenzverwaltung und die Anwendung von Gerätegrenzen pro Konto notwendig.",
+    "section1-2-li2-title": "Nutzungsdaten:",
+    "section1-2-li2-desc": "Wir sammeln Informationen darüber, wie Sie mit der App interagieren, wie die Anzahl der erstellten Angebote, verwendete Funktionen und Nutzungshäufigkeit. Diese Daten helfen uns, die App-Leistung und Benutzererfahrung zu verbessern.",
+    "section1-2-li3-title": "FCM-Token (Firebase Cloud Messaging):",
+    "section1-2-li3-desc": "Wenn Sie die App installieren, wird ein eindeutiges FCM-Token für Ihr Gerät generiert. Wir verwenden dieses Token, um Ihnen Benachrichtigungen zu senden. Dieses Token wird in Firestore gespeichert und mit Ihrem Benutzerkonto verknüpft.",
+    "section1-2-li4-title": "Werbedaten:",
+    "section1-2-li4-desc": "Wenn Sie Belohnungsanzeigen in der App ansehen, können Nutzungsdaten zu Ihrer Interaktion mit diesen Anzeigen von Werbeanbietern (wie Google AdMob) gesammelt werden. Diese Daten enthalten keine direkten persönlichen Informationen, können aber zur Verbesserung des Anzeigentargetings verwendet werden.",
+    
+    "section1-3-title": "1.3. Informationen aus anderen Quellen",
+    "section1-3-desc2": "Wir verwenden Google Authentifizierung für die Anmeldung und verlassen uns daher auf die Datenschutzrichtlinie von Google in Bezug auf die Informationen, die Google während des Authentifizierungsprozesses sammelt.",
+    
+    "section2-title": "2. Wie wir Ihre Informationen verwenden",
+    "section2-desc": "Wir verwenden die gesammelten Informationen für folgende Zwecke:",
+    "section2-li1": "<strong>Bereitstellung und Betrieb der App:</strong> Um Ihnen die Nutzung aller App-Funktionen zu ermöglichen, einschließlich der Erstellung von Angeboten, der Verwaltung von Firmeninformationen und der Datenspeicherung.",
+    "section2-li2": "<strong>Konto- und Lizenzverwaltung:</strong> Zur Verwaltung Ihres Kontos, Anwendung von Lizenzbeschränkungen (wie das Zwei-Geräte-Limit für Premium-Konten) und Verfolgung Ihres Abonnementstatus (kostenlos/premium).",
+    "section2-li3": "<strong>Synchronisierung und Sicherung:</strong> Zur Synchronisierung Ihrer Daten (Firmeninformationen und Angebote) über Ihre verschiedenen Geräte hinweg und zur Bereitstellung sicherer Backups in Firestore.",
+    "section2-li4": "<strong>Verbesserung der App:</strong> Zur Analyse der App-Nutzung durch Benutzer und Identifizierung von Verbesserungsbereichen, was uns bei der Entwicklung neuer Funktionen und Leistungsverbesserung hilft.",
+    "section2-li5": "<strong>Senden von Benachrichtigungen:</strong> Zum Senden wichtiger Benachrichtigungen zu App-Updates, neuen Funktionen oder Werbenachrichten (wenn Sie deren Empfang zustimmen).",
+    "section2-li6": "<strong>Anzeigen von Werbung:</strong> Zum Anzeigen von Belohnungsanzeigen in der App, die Ihnen Zugang zu zusätzlichen Funktionen gewähren. Dies geschieht in Zusammenarbeit mit Werbeanbietern.",
+    "section2-li7": "<strong>Sicherheit und Betrugsprävention:</strong> Zum Schutz der App und ihrer Benutzer vor betrügerischen oder unbefugten Aktivitäten.",
+    "section2-li8": "<strong>Rechtliche Compliance:</strong> Zur Einhaltung der geltenden gesetzlichen und regulatorischen Anforderungen.",
+    
+    "section3-title": "3. Weitergabe Ihrer Informationen",
+    "section3-desc": "Wir verkaufen, handeln oder vermieten Ihre persönlichen Informationen nicht an Dritte. Wir können Ihre Informationen in folgenden Fällen weitergeben:",
+    "section3-li1": "<strong>Mit Dienstleistern:</strong> Wir können Ihre Informationen an externe Dienstleister weitergeben, die uns beim Betrieb der App oder bei der Erbringung von Dienstleistungen helfen (wie Datenbank-Hosting-Dienste, Analysedienste, Werbeanbieter). Diese Dienstleister verpflichten sich, Ihre Informationen zu schützen und sie nur für die Zwecke zu verwenden, für die wir sie beauftragt haben.",
+    "section3-li2": "<strong>Für rechtliche Compliance:</strong> Wir können Ihre Informationen offenlegen, wenn dies gesetzlich vorgeschrieben ist oder als Reaktion auf eine berechtigte rechtliche Aufforderung (wie eine gerichtliche Anordnung oder einen Durchsuchungsbefehl).",
+    "section3-li3": "<strong>Zum Schutz unserer Rechte:</strong> Wir können Ihre Informationen offenlegen, um unsere Rechte, unser Eigentum oder die Sicherheit unserer Benutzer oder der Öffentlichkeit zu schützen.",
+    "section3-li4": "<strong>Bei Geschäftsübertragungen:</strong> Im Falle einer Fusion, Übernahme oder des Verkaufs aller oder eines Teils unserer Vermögenswerte können Ihre Informationen im Rahmen dieser Transaktion übertragen werden. Wir werden Sie über jede Änderung des Eigentums oder der Verwendung Ihrer persönlichen Informationen informieren.",
+    
+    "section4-title": "4. Sicherheit Ihrer Daten",
+    "section4-desc": "Wir ergreifen angemessene Sicherheitsmaßnahmen, um Ihre persönlichen Informationen vor unbefugtem Zugriff, Änderung, Offenlegung oder Zerstörung zu schützen. Diese Maßnahmen umfassen:",
+    "section4-li1": "<strong>Verschlüsselung:</strong> Einige sensible Daten, wie Lizenzinformationen, werden verschlüsselt, um deren Sicherheit zu gewährleisten.",
+    "section4-li2": "<strong>Zugriffskontrolle:</strong> Der Zugriff auf Ihre persönlichen Informationen ist auf Mitarbeiter beschränkt, die diese Informationen zur Erfüllung ihrer Funktionen kennen müssen.",
+    "section4-li3": "<strong>Datenspeicherung:</strong> Daten werden in sicheren Umgebungen gespeichert, entweder lokal auf Ihrem Gerät oder in Firestore, das starke Sicherheitsmaßnahmen bietet.",
+    "section4-desc2": "Obwohl wir unser Bestes tun, um Ihre Informationen zu schützen, ist kein Sicherheitssystem perfekt oder undurchdringlich. Daher können wir keine absolute Sicherheit Ihrer Informationen gewährleisten.",
+    
+    "section5-title": "5. Ihre Wahlmöglichkeiten und Rechte",
+    "section5-li1": "<strong>Zugriff auf und Änderung Ihrer Daten:</strong> Sie können auf Informationen zu Ihrem Unternehmen und Angebote direkt in der App zugreifen und diese ändern.",
+    "section5-li2": "<strong>Geräteverwaltung:</strong> Sie können mit Ihrem Premium-Konto verknüpfte Geräte über DeviceManagementDialog in der App verwalten.",
+    "section5-li3": "<strong>Abbestellen von Benachrichtigungen:</strong> Sie können den Empfang von Benachrichtigungen von der App jederzeit über die Einstellungen Ihres Geräts abbestellen.",
+    "section5-li4": "<strong>Löschen von Daten:</strong> Sie können Ihre Daten aus der App löschen, indem Sie die App von Ihrem Gerät deinstallieren. Bitte beachten Sie, dass für einige in Firestore gespeicherte Daten möglicherweise zusätzliche Schritte für eine vollständige Löschung erforderlich sind, die Sie durch Kontaktaufnahme mit uns anfordern können.",
+    
+    "section6-title": "6. Drittanbieterdienste",
+    "section6-desc": "Die App verwendet Drittanbieterdienste wie Google Authentication, Google AdMob und Firebase. Die Datenschutzpraktiken dieser Dienste unterliegen ihren eigenen Datenschutzrichtlinien. Wir empfehlen Ihnen, deren Datenschutzrichtlinien zu überprüfen, um zu verstehen, wie sie Ihre Informationen sammeln und verwenden.",
+    
+    "section7-title": "7. Privatsphäre von Kindern",
+    "section7-desc": "Die App richtet sich nicht an Kinder unter 13 Jahren. Wir sammeln wissentlich keine persönlichen Informationen von Kindern unter 13 Jahren. Wenn Sie erfahren, dass Ihr Kind uns ohne Ihre Einwilligung persönliche Informationen zur Verfügung gestellt hat, kontaktieren Sie uns bitte, und wir werden Schritte unternehmen, um diese Informationen aus unseren Systemen zu löschen.",
+    
+    "section8-title": "8. Änderungen dieser Datenschutzrichtlinie",
+    "section8-desc": "Wir können diese Datenschutzrichtlinie von Zeit zu Zeit aktualisieren. Wir werden Sie über alle Änderungen informieren, indem wir die neue Datenschutzrichtlinie auf dieser Seite veröffentlichen und das 'Datum des Inkrafttretens' oben aktualisieren. Wir raten Ihnen, diese Datenschutzrichtlinie regelmäßig auf Änderungen zu überprüfen. Änderungen werden wirksam, wenn sie auf dieser Seite veröffentlicht werden.",
+    
+    "section9-title": "9. Zusätzliche Details zu gesammelten Daten",
+    "section9-1-title": "9.1. Lizenz- und Authentifizierungsdaten",
+    "section9-1-desc": "Die App verwendet ein fortschrittliches Lizenzsystem auf Basis des Google-Kontos, das Folgendes umfasst:",
+    "section9-1-li1": "<strong>Eindeutiger Lizenzcode:</strong> Bei Beantragung einer Premium-Lizenz wird ein eindeutiger Code generiert, der mit Ihrem Google-Konto verknüpft ist. Dieser Code wird zur Genehmigung und Aufnahme in die Whitelist an den Administrator gesendet.",
+    "section9-1-li2": "<strong>Detaillierte Geräteinformationen:</strong> Telefonname, Gerätemodell und eindeutige Gerätekennung werden für jedes Gerät aufgezeichnet, das zur Nutzung des Premium-Kontos berechtigt ist.",
+    "section9-1-li3": "<strong>Gerätebegrenzung:</strong> Es gilt eine strenge Begrenzung von zwei Geräten pro Premium-Konto. Wenn Sie versuchen, sich von einem dritten Gerät anzumelden, erscheint ein Dialogfeld zur Verwaltung Ihrer registrierten Geräte.",
+    "section9-1-li4": "<strong>Verfolgung des Kontostatus:</strong> Bei jedem Start der App mit Internetverbindung wird eine Online-Überprüfung des Kontotyps (kostenlos/premium) durchgeführt.",
+    
+    "section9-2-title": "9.2. Nutzungs- und Statistikdaten",
+    "section9-2-li1": "<strong>Anzahl der Angebote:</strong> Die Anzahl der erstellten Angebote wird verfolgt, insbesondere für kostenlose Konten, um entsprechende Einschränkungen anzuwenden.",
+    "section9-2-li2": "<strong>Nutzungshäufigkeit:</strong> Informationen zur Häufigkeit der App-Nutzung und der Verwendung verschiedener Funktionen.",
+    "section9-2-li3": "<strong>App-Leistung:</strong> Daten zu Antwortzeiten und eventuell auftretenden Fehlern zur Leistungsverbesserung.",
+    
+    "section9-3-title": "9.3. Werbe- und Belohnungsdaten",
+    "section9-3-li1": "<strong>Anzeigeninteraktion:</strong> Beim Ansehen von Belohnungsanzeigen werden Anzeigendauer und Abschluss der Anzeige aufgezeichnet, um angemessene Belohnungen zu gewähren.",
+    "section9-3-li2": "<strong>Anzeigenkennungen:</strong> Von Google AdMob bereitgestellte Anzeigenkennungen können zur Verbesserung des Anzeigentargetings verwendet werden.",
+    
+    "contact-title": "Kontaktieren Sie den App-Entwickler",
+    "contact-desc": "Wenn Sie Fragen haben oder Hilfe bezüglich der Datenschutzrichtlinie oder der App benötigen, kontaktieren Sie uns bitte über:",
+    "email-click": "Klicken Sie hier, um die E-Mail-App zu öffnen",
+    "whatsapp-click": "Klicken Sie hier, um über WhatsApp zu kontaktieren",
+    
+    "footer-text": "© 2025 Angebotserstellungs-App. Alle Rechte vorbehalten."
+},
+
+tr: {
+    "current-lang": "Türkçe",
+    "policy-title": "Gizlilik Politikası",
+    "policy-subtitle": "Teklif Oluşturma Uygulaması İçin",
+    "effective-date": "Yürürlük Tarihi: 12 Eylül 2025",
+    "intro-text": "Bu Gizlilik Politikası, Teklif Oluşturma uygulamasını (bundan sonra 'Uygulama' olarak anılacaktır) kullandığınızda kişisel bilgilerinizi nasıl topladığımızı, kullandığımızı ve ifşa ettiğimizi açıklar. Gizliliğinizi korumaya kararlıyız ve güveninize değer veriyoruz. Verilerinizle ilgili uygulamalarımızı anlamak için lütfen bu politikayı dikkatlice okuyun.",
+    
+    "section1-title": "1. Topladığımız Bilgiler",
+    "section1-1-title": "1.1. Doğrudan Bize Sağladığınız Bilgiler",
+    "section1-1-desc": "Uygulamayı kullandığınızda, sizden belirli kişisel bilgiler sağlamanızı isteyebiliriz; bunlar aşağıdakilerle sınırlı olmamak üzere şunları içerebilir:",
+    "section1-1-li1-title": "Hesap Bilgileri:",
+    "section1-1-li1-desc": "Google hesabınızla giriş yaparken, e-posta adresinizi ve kullanıcı kimliğinizi Google'dan topluyoruz. Bu bilgiler hesabınızı yönetmek ve lisans özellikleri ile cihaz yönetimi sağlamak için gereklidir.",
+    "section1-1-li2-title": "Şirket Bilgileri:",
+    "section1-1-li2-desc": "Uygulamada şirket bilgilerinizi girerseniz (isim, adres, telefon numarası, e-posta, logo yolu, imza yolu, mühür yolu gibi), bu bilgiler cihazınızda yerel olarak saklanır ve yedekleme ve cihazlarınız arasında senkronizasyon için Firestore (bulut veritabanı) ile senkronize edilebilir.",
+    "section1-1-li3-title": "Teklif Oluşturma Bilgileri:",
+    "section1-1-li3-desc": "Oluşturduğunuz tekliflerle ilgili tüm veriler (müşteri adı, teklif numarası, teklif tarihi, kalem detayları, miktarlar, fiyatlar, para birimleri gibi) cihazınızda yerel olarak saklanır ve Firestore ile senkronize edilebilir.",
+    
+    "section1-2-title": "1.2. Otomatik Olarak Toplanan Bilgiler",
+    "section1-2-desc": "Uygulamayı kullandığınızda, otomatik olarak bazı bilgiler toplayabiliriz:",
+    "section1-2-li1-title": "Cihaz Bilgileri:",
+    "section1-2-li1-desc": "Cihaz adı, modeli ve benzersiz cihaz tanımlayıcısı gibi cihazınız hakkında bilgi topluyoruz. Bu bilgiler lisans yönetimi ve hesap başına cihaz sınırlarının uygulanması için gereklidir.",
+    "section1-2-li2-title": "Kullanım Verileri:",
+    "section1-2-li2-desc": "Uygulama ile nasıl etkileşimde bulunduğunuz hakkında, oluşturulan teklif sayısı, kullanılan özellikler ve kullanım sıklığı gibi bilgiler topluyoruz. Bu veriler Uygulama performansını ve kullanıcı deneyimini iyileştirmemize yardımcı olur.",
+    "section1-2-li3-title": "FCM Token'ları (Firebase Cloud Messaging):",
+    "section1-2-li3-desc": "Uygulamayı yüklediğinizde, cihazınız için benzersiz bir FCM token'ı oluşturulur. Bu token'ı size bildirim göndermek için kullanıyoruz. Bu token Firestore'da saklanır ve kullanıcı hesabınızla ilişkilendirilir.",
+    "section1-2-li4-title": "Reklam Verileri:",
+    "section1-2-li4-desc": "Uygulama içinde ödül reklamları izlerseniz, bu reklamlarla etkileşiminizle ilgili kullanım verileri reklam sağlayıcıları (Google AdMob gibi) tarafından toplanabilir. Bu veriler doğrudan kişisel bilgiler içermez ancak reklam hedeflemesini iyileştirmek için kullanılabilir.",
+    
+    "section1-3-title": "1.3. Diğer Kaynaklardan Gelen Bilgiler",
+    "section1-3-desc2": "Giriş için Google Kimlik Doğrulama kullanıyoruz ve bu nedenle, kimlik doğrulama sürecinde Google'ın topladığı bilgiler konusunda Google'ın gizlilik politikasına güveniyoruz.",
+    
+    "section2-title": "2. Bilgilerinizi Nasıl Kullanıyoruz",
+    "section2-desc": "Topladığımız bilgileri aşağıdaki amaçlarla kullanıyoruz:",
+    "section2-li1": "<strong>Uygulamayı Sağlama ve İşletme:</strong> Teklif oluşturma, şirket bilgilerini yönetme ve veri kaydetme dahil olmak üzere tüm Uygulama özelliklerini kullanabilmeniz için.",
+    "section2-li2": "<strong>Hesap ve Lisans Yönetimi:</strong> Hesabınızı yönetmek, lisans kısıtlamalarını uygulamak (premium hesaplar için iki cihaz sınırı gibi) ve abonelik durumunuzu (ücretsiz/premium) takip etmek için.",
+    "section2-li3": "<strong>Senkronizasyon ve Yedekleme:</strong> Verilerinizi (şirket bilgileri ve teklifler) farklı cihazlarınız arasında senkronize etmek ve Firestore'da güvenli yedekler sağlamak için.",
+    "section2-li4": "<strong>Uygulamayı İyileştirme:</strong> Kullanıcıların Uygulamayı nasıl kullandığını analiz etmek ve iyileştirilecek alanları belirlemek için, bu da yeni özellikler geliştirmemize ve performansı iyileştirmemize yardımcı olur.",
+    "section2-li5": "<strong>Bildirim Gönderme:</strong> Uygulama güncellemeleri, yeni özellikler veya promosyon mesajları hakkında size önemli bildirimler göndermek için (bunları almayı kabul ederseniz).",
+    "section2-li6": "<strong>Reklam Gösterme:</strong> Size ek özelliklere erişim sağlayan ödül reklamlarını Uygulama içinde göstermek için. Bu, reklam sağlayıcıları ile işbirliği içinde yapılır.",
+    "section2-li7": "<strong>Güvenlik ve Dolandırıcılık Önleme:</strong> Uygulamayı ve kullanıcılarını dolandırıcılık veya yetkisiz faaliyetlerden korumak için.",
+    "section2-li8": "<strong>Yasal Uyumluluk:</strong> Uygulanabilir yasal ve düzenleyici gerekliliklere uymak için.",
+    
+    "section3-title": "3. Bilgilerinizin Paylaşılması",
+    "section3-desc": "Kişisel bilgilerinizi üçüncü taraflara satmayız, takas etmeyiz veya kiralamayız. Bilgilerinizi aşağıdaki durumlarda paylaşabiliriz:",
+    "section3-li1": "<strong>Hizmet Sağlayıcılarla:</strong> Bilgilerinizi, Uygulamayı işletmemize veya hizmet sağlamamıza yardımcı olan harici hizmet sağlayıcılarla (veritabanı barındırma hizmetleri, analiz hizmetleri, reklam sağlayıcıları gibi) paylaşabiliriz. Bu sağlayıcılar, bilgilerinizi korumayı ve yalnızca onları sözleşme yaptığımız amaçlar için kullanmayı taahhüt eder.",
+    "section3-li2": "<strong>Yasal Uyumluluk İçin:</strong> Bilgilerinizi, yasa gerektirdiğinde veya geçerli bir yasal talebe (mahkeme emri veya arama emri gibi) yanıt olarak ifşa edebiliriz.",
+    "section3-li3": "<strong>Haklarımızı Korumak İçin:</strong> Haklarımızı, mülkiyetimizi veya kullanıcılarımızın veya halkın güvenliğini korumak için bilgilerinizi ifşa edebiliriz.",
+    "section3-li4": "<strong>İş Transferi Durumunda:</strong> Bir birleşme, devralma veya tüm varlıklarımızın veya bir kısmının satışı durumunda, bilgileriniz bu işlemin bir parçası olarak aktarılabilir. Kişisel bilgilerinizin mülkiyetindeki veya kullanımındaki herhangi bir değişiklikten sizi haberdar edeceğiz.",
+    
+    "section4-title": "4. Verilerinizin Güvenliği",
+    "section4-desc": "Kişisel bilgilerinizi yetkisiz erişim, değişiklik, ifşa veya imhadan korumak için makul güvenlik önlemleri alıyoruz. Bu önlemler şunları içerir:",
+    "section4-li1": "<strong>Şifreleme:</strong> Lisans bilgileri gibi bazı hassas veriler güvenliğini sağlamak için şifrelenir.",
+    "section4-li2": "<strong>Erişim Kontrolü:</strong> Kişisel bilgilerinize erişim, bu bilgileri işlevlerini yerine getirmek için bilmeleri gereken çalışanlarla kısıtlıdır.",
+    "section4-li3": "<strong>Veri Saklama:</strong> Veriler, cihazınızda yerel olarak veya güçlü güvenlik önlemleri sağlayan Firestore'da güvenli ortamlarda saklanır.",
+    "section4-desc2": "Bilgilerinizi korumak için elimizden geleni yapsak da, hiçbir güvenlik sistemi mükemmel veya aşılamaz değildir. Bu nedenle, bilgilerinizin mutlak güvenliğini garanti edemeyiz.",
+    
+    "section5-title": "5. Seçenekleriniz ve Haklarınız",
+    "section5-li1": "<strong>Verilerinize Erişim ve Değişiklik:</strong> Şirket bilgilerinize ve tekliflere doğrudan Uygulama içinden erişebilir ve değişiklik yapabilirsiniz.",
+    "section5-li2": "<strong>Cihaz Yönetimi:</strong> Premium hesabınızla ilişkili cihazları Uygulama içindeki DeviceManagementDialog aracılığıyla yönetebilirsiniz.",
+    "section5-li3": "<strong>Bildirimlerden Çıkma:</strong> Uygulamadan bildirim almayı istediğiniz zaman cihaz ayarlarınız üzerinden iptal edebilirsiniz.",
+    "section5-li4": "<strong>Veri Silme:</strong> Uygulamayı cihazınızdan kaldırarak verilerinizi Uygulamadan silebilirsiniz. Lütfen Firestore'da saklanan bazı verilerin tam silinmesi için ek adımlar gerekebileceğini unutmayın; bunları bizimle iletişime geçerek talep edebilirsiniz.",
+    
+    "section6-title": "6. Üçüncü Taraf Hizmetleri",
+    "section6-desc": "Uygulama, Google Authentication, Google AdMob ve Firebase gibi üçüncü taraf hizmetleri kullanır. Bu hizmetlerin gizlilik uygulamaları kendi gizlilik politikalarına tabidir. Bilgilerinizi nasıl topladıklarını ve kullandıklarını anlamak için gizlilik politikalarını incelemenizi öneririz.",
+    
+    "section7-title": "7. Çocuk Gizliliği",
+    "section7-desc": "Uygulama 13 yaşın altındaki çocuklara yönelik değildir. 13 yaşın altındaki çocuklardan kasıtlı olarak kişisel bilgi toplamıyoruz. Çocuğunuzun sizin izniniz olmadan bize kişisel bilgi sağladığını öğrenirseniz, lütfen bizimle iletişime geçin ve bu bilgileri sistemlerimizden silmek için adımlar atacağız.",
+    
+    "section8-title": "8. Bu Gizlilik Politikasındaki Değişiklikler",
+    "section8-desc": "Bu Gizlilik Politikasını zaman zaman güncelleyebiliriz. Herhangi bir değişiklikten yeni Gizlilik Politikasını bu sayfada yayınlayarak ve üstteki 'Yürürlük Tarihi'ni güncelleyerek sizi haberdar edeceğiz. Herhangi bir değişiklik için bu Gizlilik Politikasını periyodik olarak gözden geçirmenizi tavsiye ederiz. Değişiklikler bu sayfada yayınlandığında yürürlüğe girer.",
+    
+    "section9-title": "9. Toplanan Veriler Hakkında Ek Detaylar",
+    "section9-1-title": "9.1. Lisans ve Kimlik Doğrulama Verileri",
+    "section9-1-desc": "Uygulama, Google hesabına dayalı gelişmiş bir lisans sistemi kullanır; bu sistem şunları içerir:",
+    "section9-1-li1": "<strong>Benzersiz Lisans Kodu:</strong> Premium lisans talep edildiğinde, Google hesabınızla ilişkili benzersiz bir kod oluşturulur. Bu kod, onay ve beyaz listeye eklenmesi için yöneticiye gönderilir.",
+    "section9-1-li2": "<strong>Detaylı Cihaz Bilgileri:</strong> Premium hesaba erişim yetkisi olan her cihaz için telefon adı, cihaz modeli ve benzersiz cihaz tanımlayıcısı kaydedilir.",
+    "section9-1-li3": "<strong>Cihaz Sınırı:</strong> Premium hesap başına iki cihazlık katı bir sınır uygulanır. Üçüncü bir cihazdan giriş yapmaya çalışırsanız, kayıtlı cihazlarınızı yönetmek için bir iletişim kutusu görünecektir.",
+    "section9-1-li4": "<strong>Hesap Durumu Takibi:</strong> Uygulama her İnternet bağlantısıyla başlatıldığında hesap türü (ücretsiz/premium) için çevrimiçi bir kontrol yapılır.",
+    
+    "section9-2-title": "9.2. Kullanım ve İstatistik Verileri",
+    "section9-2-li1": "<strong>Teklif Sayısı:</strong> Uygun kısıtlamaları uygulamak için özellikle ücretsiz hesaplar için oluşturulan teklif sayısı takip edilir.",
+    "section9-2-li2": "<strong>Kullanım Sıklığı:</strong> Uygulamanın ne sıklıkla açıldığı ve farklı özelliklerin kullanıldığı hakkında bilgiler.",
+    "section9-2-li3": "<strong>Uygulama Performansı:</strong> Performansı iyileştirmek için yanıt süreleri ve oluşabilecek hatalar hakkında veriler.",
+    
+    "section9-3-title": "9.3. Reklam ve Ödül Verileri",
+    "section9-3-li1": "<strong>Reklam Etkileşimi:</strong> Ödül reklamları izlerken, uygun ödülleri vermek için izleme süresi ve reklam tamamlanması kaydedilir.",
+    "section9-3-li2": "<strong>Reklam Tanımlayıcıları:</strong> Google AdMob tarafından sağlanan reklam tanımlayıcıları, reklam hedeflemesini iyileştirmek için kullanılabilir.",
+    
+    "contact-title": "Uygulama Geliştiricisi ile İletişime Geçin",
+    "contact-desc": "Gizlilik politikası veya Uygulama hakkında herhangi bir sorunuz varsa veya yardıma ihtiyacınız varsa, lütfen şu yollarla bizimle iletişime geçin:",
+    "email-click": "E-posta uygulamasını açmak için tıklayın",
+    "whatsapp-click": "WhatsApp üzerinden iletişime geçmek için tıklayın",
+    
+    "footer-text": "© 2025 Teklif Oluşturma Uygulaması. Tüm hakları saklıdır."
+},
+
+ru: {
+    "current-lang": "Русский",
+    "policy-title": "Политика Конфиденциальности",
+    "policy-subtitle": "Для Приложения Создания Котировок",
+    "effective-date": "Дата вступления в силу: 12 сентября 2025 года",
+    "intro-text": "Настоящая Политика Конфиденциальности объясняет, как мы собираем, используем и раскрываем вашу личную информацию при использовании вами приложения для создания котировок (далее именуемого 'Приложение'). Мы стремимся защищать вашу конфиденциальность и ценим ваше доверие. Пожалуйста, внимательно прочитайте эту политику, чтобы понять наши методы в отношении ваших данных.",
+    
+    "section1-title": "1. Информация, которую мы собираем",
+    "section1-1-title": "1.1. Информация, которую вы предоставляете нам напрямую",
+    "section1-1-desc": "Когда вы используете Приложение, мы можем попросить вас предоставить определенную личную информацию, которая может включать, но не ограничивается:",
+    "section1-1-li1-title": "Информация об учетной записи:",
+    "section1-1-li1-desc": "При входе с помощью вашей учетной записи Google мы собираем ваш адрес электронной почты и идентификатор пользователя от Google. Эта информация необходима для управления вашей учетной записью и предоставления функций лицензирования и управления устройствами.",
+    "section1-1-li2-title": "Информация о компании:",
+    "section1-1-li2-desc": "Если вы вводите информацию о вашей компании в Приложении (например, название, адрес, номер телефона, электронная почта, путь к логотипу, путь к подписи, путь к печати), эта информация хранится локально на вашем устройстве и может синхронизироваться с Firestore (облачной базой данных) для резервного копирования и синхронизации между вашими устройствами.",
+    "section1-1-li3-title": "Информация о создании котировок:",
+    "section1-1-li3-desc": "Все данные, связанные с создаваемыми вами котировками (например, имя клиента, номер котировки, дата котировки, детали позиций, количества, цены, валюты), хранятся локально на вашем устройстве и могут синхронизироваться с Firestore.",
+    
+    "section1-2-title": "1.2. Информация, собираемая автоматически",
+    "section1-2-desc": "Когда вы используете Приложение, мы можем автоматически собирать некоторую информацию:",
+    "section1-2-li1-title": "Информация об устройстве:",
+    "section1-2-li1-desc": "Мы собираем информацию о вашем устройстве, такую как название устройства, модель и уникальный идентификатор устройства. Эта информация необходима для управления лицензиями и применения ограничений на количество устройств для каждой учетной записи.",
+    "section1-2-li2-title": "Данные об использовании:",
+    "section1-2-li2-desc": "Мы собираем информацию о том, как вы взаимодействуете с Приложением, например количество созданных котировок, используемые функции и частота использования. Эти данные помогают нам улучшить производительность Приложения и пользовательский опыт.",
+    "section1-2-li3-title": "Токены FCM (Firebase Cloud Messaging):",
+    "section1-2-li3-desc": "При установке Приложения для вашего устройства генерируется уникальный токен FCM. Мы используем этот токен для отправки вам уведомлений. Этот токен хранится в Firestore и связан с вашей учетной записью пользователя.",
+    "section1-2-li4-title": "Рекламные данные:",
+    "section1-2-li4-desc": "Если вы смотрите рекламные объявления с вознаграждением в Приложении, данные об использовании, связанные с вашим взаимодействием с этими объявлениями, могут собираться рекламными провайдерами (такими как Google AdMob). Эти данные не включают прямую личную информацию, но могут использоваться для улучшения таргетинга рекламы.",
+    
+    "section1-3-title": "1.3. Информация из других источников",
+    "section1-3-desc2": "Мы используем аутентификацию Google для входа и, следовательно, полагаемся на политику конфиденциальности Google в отношении информации, которую Google собирает в процессе аутентификации.",
+    
+    "section2-title": "2. Как мы используем вашу информацию",
+    "section2-desc": "Мы используем собираемую информацию для следующих целей:",
+    "section2-li1": "<strong>Предоставление и работа Приложения:</strong> Чтобы позволить вам использовать все функции Приложения, включая создание котировок, управление информацией о компании и сохранение данных.",
+    "section2-li2": "<strong>Управление учетной записью и лицензиями:</strong> Для управления вашей учетной записью, применения ограничений лицензирования (например, ограничение в два устройства для премиум-аккаунтов) и отслеживания статуса вашей подписки (бесплатный/премиум).",
+    "section2-li3": "<strong>Синхронизация и резервное копирование:</strong> Для синхронизации ваших данных (информации о компании и котировок) на ваших различных устройствах и предоставления безопасных резервных копий в Firestore.",
+    "section2-li4": "<strong>Улучшение Приложения:</strong> Для анализа того, как пользователи используют Приложение, и определения областей для улучшения, что помогает нам разрабатывать новые функции и улучшать производительность.",
+    "section2-li5": "<strong>Отправка уведомлений:</strong> Для отправки вам важных уведомлений относительно обновлений Приложения, новых функций или рекламных сообщений (если вы согласились их получать).",
+    "section2-li6": "<strong>Показ рекламы:</strong> Для показа рекламных объявлений с вознаграждением в Приложении, которые предоставляют вам доступ к дополнительным функциям. Это делается в сотрудничестве с рекламными провайдерами.",
+    "section2-li7": "<strong>Безопасность и предотвращение мошенничества:</strong> Для защиты Приложения и его пользователей от мошеннических или несанкционированных действий.",
+    "section2-li8": "<strong>Правовое соответствие:</strong> Для соблюдения применимых правовых и нормативных требований.",
+    
+    "section3-title": "3. Раскрытие вашей информации",
+    "section3-desc": "Мы не продаем, не обмениваем и не сдаем в аренду вашу личную информацию третьим лицам. Мы можем делиться вашей информацией в следующих случаях:",
+    "section3-li1": "<strong>С поставщиками услуг:</strong> Мы можем делиться вашей информацией с внешними поставщиками услуг, которые помогают нам управлять Приложением или предоставлять услуги (такие как услуги хостинга баз данных, аналитические услуги, рекламные провайдеры). Эти поставщики обязуются защищать вашу информацию и использовать ее только для целей, для которых мы их наняли.",
+    "section3-li2": "<strong>Для правового соответствия:</strong> Мы можем раскрывать вашу информацию, если это требуется по закону или в ответ на действительный юридический запрос (например, судебный приказ или ордер на обыск).",
+    "section3-li3": "<strong>Для защиты наших прав:</strong> Мы можем раскрывать вашу информацию для защиты наших прав, собственности или безопасности наших пользователей или общественности.",
+    "section3-li4": "<strong>В случае передачи бизнеса:</strong> В случае слияния, поглощения или продажи всех или части наших активов ваша информация может быть передана как часть этой сделки. Мы уведомим вас о любых изменениях в собственности или использовании вашей личной информации.",
+    
+    "section4-title": "4. Безопасность ваших данных",
+    "section4-desc": "Мы принимаем разумные меры безопасности для защиты вашей личной информации от несанкционированного доступа, изменения, раскрытия или уничтожения. Эти меры включают:",
+    "section4-li1": "<strong>Шифрование:</strong> Некоторые конфиденциальные данные, такие как информация о лицензии, шифруются для обеспечения их безопасности.",
+    "section4-li2": "<strong>Контроль доступа:</strong> Доступ к вашей личной информации ограничен сотрудниками, которым необходимо знать эту информацию для выполнения своих функций.",
+    "section4-li3": "<strong>Хранение данных:</strong> Данные хранятся в безопасных средах, либо локально на вашем устройстве, либо в Firestore, который обеспечивает надежные меры безопасности.",
+    "section4-desc2": "Хотя мы прилагаем все усилия для защиты вашей информации, ни одна система безопасности не является идеальной или неуязвимой. Поэтому мы не можем гарантировать абсолютную безопасность вашей информации.",
+    
+    "section5-title": "5. Ваши выбор и права",
+    "section5-li1": "<strong>Доступ к вашим данным и их изменение:</strong> Вы можете получать доступ к информации о вашей компании и котировкам и изменять их непосредственно в Приложении.",
+    "section5-li2": "<strong>Управление устройствами:</strong> Вы можете управлять устройствами, связанными с вашей премиум-учетной записью, через DeviceManagementDialog в Приложении.",
+    "section5-li3": "<strong>Отказ от уведомлений:</strong> Вы можете отказаться от получения уведомлений от Приложения в любое время через настройки вашего устройства.",
+    "section5-li4": "<strong>Удаление данных:</strong> Вы можете удалить свои данные из Приложения, удалив Приложение с вашего устройства. Обратите внимание, что для полного удаления некоторых данных, хранящихся в Firestore, могут потребоваться дополнительные шаги, которые вы можете запросить, связавшись с нами.",
+    
+    "section6-title": "6. Сторонние сервисы",
+    "section6-desc": "Приложение использует сторонние сервисы, такие как Google Authentication, Google AdMob и Firebase. Политика конфиденциальности этих сервисов регулируется их собственными политиками конфиденциальности. Мы рекомендуем вам ознакомиться с их политиками конфиденциальности, чтобы понять, как они собирают и используют вашу информацию.",
+    
+    "section7-title": "7. Конфиденциальность детей",
+    "section7-desc": "Приложение не предназначено для детей младше 13 лет. Мы сознательно не собираем личную информацию от детей младше 13 лет. Если вы узнаете, что ваш ребенок предоставил нам личную информацию без вашего согласия, пожалуйста, свяжитесь с нами, и мы примем меры для удаления этой информации из наших систем.",
+    
+    "section8-title": "8. Изменения в этой политике конфиденциальности",
+    "section8-desc": "Мы можем время от времени обновлять эту Политику Конфиденциальности. Мы уведомим вас о любых изменениях, разместив новую Политику Конфиденциальности на этой странице и обновив 'Дату вступления в силу' вверху. Мы советуем вам периодически пересматривать эту Политику Конфиденциальности на предмет любых изменений. Изменения вступают в силу при их публикации на этой странице.",
+    
+    "section9-title": "9. Дополнительные детали о собранных данных",
+    "section9-1-title": "9.1. Данные лицензирования и аутентификации",
+    "section9-1-desc": "Приложение использует расширенную систему лицензирования на основе учетной записи Google, которая включает:",
+    "section9-1-li1": "<strong>Уникальный код лицензии:</strong> При запросе премиальной лицензии генерируется уникальный код, связанный с вашей учетной записью Google. Этот код отправляется администратору для утверждения и включения в белый список.",
+    "section9-1-li2": "<strong>Подробная информация об устройстве:</strong> Имя телефона, модель устройства и уникальный идентификатор устройства записываются для каждого устройства, авторизованного для доступа к премиум-учетной записи.",
+    "section9-1-li3": "<strong>Лимит устройств:</strong> Применяется строгое ограничение в два устройства на одну премиум-учетную запись. Если вы попытаетесь войти с третьего устройства, появится диалоговое окно для управления вашими зарегистрированными устройствами.",
+    "section9-1-li4": "<strong>Отслеживание статуса учетной записи:</strong> При каждом запуске Приложения с подключением к Интернету выполняется онлайн-проверка типа учетной записи (бесплатный/премиум).",
+    
+    "section9-2-title": "9.2. Данные об использовании и статистике",
+    "section9-2-li1": "<strong>Количество котировок:</strong> Отслеживается количество созданных котировок, особенно для бесплатных учетных записей, чтобы применять соответствующие ограничения.",
+    "section9-2-li2": "<strong>Частота использования:</strong> Информация о том, как часто открывается Приложение и используются различные функции.",
+    "section9-2-li3": "<strong>Производительность Приложения:</strong> Данные о времени отклика и любых ошибках, которые могут возникнуть, для улучшения производительности.",
+    
+    "section9-3-title": "9.3. Рекламные данные и данные о вознаграждениях",
+    "section9-3-li1": "<strong>Взаимодействие с рекламой:</strong> При просмотре рекламных объявлений с вознаграждением записываются продолжительность просмотра и завершение объявления для предоставления соответствующих вознаграждений.",
+    "section9-3-li2": "<strong>Идентификаторы рекламы:</strong> Идентификаторы рекламы, предоставляемые Google AdMob, могут использоваться для улучшения таргетинга рекламы.",
+    
+    "contact-title": "Свяжитесь с разработчиком приложения",
+    "contact-desc": "Если у вас есть какие-либо вопросы или вам нужна помощь относительно политики конфиденциальности или Приложения, пожалуйста, свяжитесь с нами через:",
+    "email-click": "Нажмите, чтобы открыть почтовое приложение",
+    "whatsapp-click": "Нажмите, чтобы связаться через WhatsApp",
+    
+    "footer-text": "© 2025 Приложение Создания Котировок. Все права защищены."
+}
+            };
+
+        // العناصر التفاعلية
+        const langBtn = document.querySelector('.lang-btn');
+const langDropdown = document.getElementById('lang-dropdown');
+const currentLangElement = document.getElementById('current-lang');
+
+// تبديل عرض القائمة المنسدلة
+if (langBtn) {
+    langBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        langDropdown.classList.toggle('show');
+    });
+}
+
+// إغلاق القائمة المنسدلة عند النقر خارجها
+document.addEventListener('click', function() {
+    if (langDropdown) {
+        langDropdown.classList.remove('show');
+    }
+});
+
+// منع إغلاق القائمة عند النقر داخلها
+if (langDropdown) {
+    langDropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+}
+
+// تغيير اللغة
+document.querySelectorAll('.lang-option').forEach(option => {
+    option.addEventListener('click', function(e) {
+        e.preventDefault();
+        const selectedLang = this.getAttribute('data-lang');
+        changeLanguage(selectedLang);
+        if (langDropdown) {
+            langDropdown.classList.remove('show');
+        }
+    });
+});
+
+// دالة تغيير اللغة
+function changeLanguage(lang) {
+    // التحقق من وجود الترجمات للغة المطلوبة
+    if (!translations[lang]) {
+        console.error('اللغة غير مدعومة:', lang);
+        lang = 'en'; // استخدام العربية كافتراضي
+    }
+    
+    // تحديث النص الحالي للغة
+    if (currentLangElement) {
+        currentLangElement.textContent = translations[lang]["current-lang"];
+    }
+    
+    // تحديث جميع العناصر التي تحتوي على معرفات
+    Object.keys(translations[lang]).forEach(key => {
+        const element = document.getElementById(key);
+        if (element) {
+            if (key.includes('li') && key !== 'current-lang') {
+                // العناصر التي تحتوي على HTML
+                element.innerHTML = translations[lang][key];
+            } else {
+                // العناصر النصية العادية
+                element.textContent = translations[lang][key];
+            }
+        }
+    });
+    
+    // تغيير اتجاه النص للغات المختلفة
+    if (lang === 'ar') {
+        document.documentElement.dir = 'rtl';
+        document.documentElement.lang = 'ar';
+    } else {
+        document.documentElement.dir = 'ltr';
+        document.documentElement.lang = lang;
+    }
+    
+    // حفظ اللغة المفضلة
+    localStorage.setItem('preferred-language', lang);
+    
+    console.log('تم تغيير اللغة إلى:', lang);
+}
+
+// دالة للكشف عن لغة الهاتف وتطبيق اللغة المناسبة
+function detectAndApplyLanguage() {
+    // أولاً: التحقق من وجود لغة محفوظة مسبقاً
+    const savedLang = localStorage.getItem('preferred-language');
+    if (savedLang && translations[savedLang]) {
+        changeLanguage(savedLang);
+        console.log('تم استخدام اللغة المحفوظة:', savedLang);
+        return;
+    }
+    
+    // ثانياً: إذا لم توجد لغة محفوظة، نكتشف لغة الجهاز
+    const userLanguage = getDeviceLanguage();
+    
+    // اللغات المدعومة في التطبيق
+    const supportedLanguages = ['ar', 'en', 'fr', 'es', 'de', 'tr', 'ru'];
+    
+    // التحقق إذا كانت لغة الجهاز مدعومة
+    if (supportedLanguages.includes(userLanguage) && translations[userLanguage]) {
+        // إذا كانت مدعومة، استخدم لغة الجهاز
+        changeLanguage(userLanguage);
+        console.log(`تم تطبيق لغة الجهاز: ${userLanguage}`);
+    } else {
+        // إذا لم تكن مدعومة، استخدم العربية كافتراضي
+        changeLanguage('en');
+        console.log('لغة الجهاز غير مدعومة، تم استخدام العربية كافتراضي');
+    }
+}
+
+// دالة للحصول على لغة الجهاز (معدلة)
+function getDeviceLanguage() {
+    let detectedLang = 'en'; // قيمة افتراضية
+    
+    try {
+        // المحاولة الأولى: navigator.language (الأكثر شيوعاً)
+        if (navigator.language) {
+            detectedLang = navigator.language.split('-')[0].toLowerCase();
+        }
+        
+        // المحاولة الثانية: navigator.languages (قائمة اللغات المفضلة)
+        if ((!detectedLang || detectedLang === 'ar') && navigator.languages && navigator.languages.length > 0) {
+            detectedLang = navigator.languages[0].split('-')[0].toLowerCase();
+        }
+        
+        // المحاولة الثالثة: navigator.userLanguage (للمتصفحات القديمة)
+        if ((!detectedLang || detectedLang === 'ar') && navigator.userLanguage) {
+            detectedLang = navigator.userLanguage.split('-')[0].toLowerCase();
+        }
+        
+        // المحاولة الرابعة: navigator.browserLanguage (للمتصفحات القديمة)
+        if ((!detectedLang || detectedLang === 'ar') && navigator.browserLanguage) {
+            detectedLang = navigator.browserLanguage.split('-')[0].toLowerCase();
+        }
+    } catch (error) {
+        console.error('خطأ في كشف لغة الجهاز:', error);
+        detectedLang = 'en';
+    }
+    
+    console.log('لغة الجهاز المكتشفة:', detectedLang);
+    return detectedLang;
+}
+
+        // دالة للكشف عن وضع الهاتف (فاتح أو داكن) وتطبيقه
+function detectAndApplyTheme() {
+    // الكشف عن تفضيلات الوضع من النظام
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
+    
+    // تطبيق الوضع المناسب
+    if (isDarkMode) {
+        applyDarkTheme();
+    } else if (isLightMode) {
+        applyLightTheme();
+    } else {
+        // إذا لم يكن هناك تفضيل محدد، استخدم الوضع الفاتح كافتراضي
+        applyLightTheme();
+    }
+    
+    // الاستماع للتغييرات في وضع النظام
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (e.matches) {
+            applyDarkTheme();
+        }
+    });
+    
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
+        if (e.matches) {
+            applyLightTheme();
+        }
+    });
+}
+
+// دالة لتطبيق الوضع الداكن
+function applyDarkTheme() {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.body.style.backgroundColor = '#1a1a1a';
+    document.body.style.color = '#ffffff';
+    
+    // تحديث ألوان العناصر المختلفة للوضع الداكن
+    const contentElements = document.querySelectorAll('.content');
+    contentElements.forEach(element => {
+        element.style.backgroundColor = '#2d2d2d';
+        element.style.color = '#ffffff';
+    });
+    
+    // تحديث ألوان العناوين
+    const headings = document.querySelectorAll('h1, h2, h3');
+    headings.forEach(heading => {
+        heading.style.color = '#3498db';
+    });
+    
+    // تحديث خلفية footer للوضع الداكن
+    const footer = document.querySelector('footer');
+    if (footer) {
+        footer.style.backgroundColor = '#1a1a1a';
+        footer.style.color = '#ffffff';
+        footer.style.borderTop = '1px solid #444';
+    }
+    
+    // تحديث خلفية contact section للوضع الداكن
+    const contactSection = document.querySelector('.contact-section');
+    if (contactSection) {
+        contactSection.style.background = 'linear-gradient(135deg, #1e3c72, #2a5298)';
+    }
+    
+    // تحديث contact items للوضع الداكن
+    const contactItems = document.querySelectorAll('.contact-item');
+    contactItems.forEach(item => {
+        item.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+    });
+    
+    console.log('تم تطبيق الوضع الداكن');
+}
+// دالة لتطبيق الوضع الفاتح
+function applyLightTheme() {
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.body.style.backgroundColor = '#f5f7fa';
+    document.body.style.color = '#333';
+    
+    // إعادة الألوان إلى وضعها الأصلي
+    const contentElements = document.querySelectorAll('.content');
+    contentElements.forEach(element => {
+        element.style.backgroundColor = 'white';
+        element.style.color = '#333';
+    });
+    
+    const headings = document.querySelectorAll('h1, h2, h3');
+    headings.forEach(heading => {
+        heading.style.color = '#2c3e50';
+    });
+    
+    // إعادة footer للوضع الفاتح
+    const footer = document.querySelector('footer');
+    if (footer) {
+        footer.style.backgroundColor = '';
+        footer.style.color = '';
+        footer.style.borderTop = '';
+    }
+    
+    // إعادة contact section للوضع الفاتح
+    const contactSection = document.querySelector('.contact-section');
+    if (contactSection) {
+        contactSection.style.background = 'linear-gradient(135deg, var(--secondary-color), var(--primary-color))';
+    }
+    
+    // إعادة contact items للوضع الفاتح
+    const contactItems = document.querySelectorAll('.contact-item');
+    contactItems.forEach(item => {
+        item.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+    });
+    
+    console.log('تم تطبيق الوضع الفاتح');
+}
+ // دالة لتهيئة جميع الإعدادات عند تحميل الصفحة
+function initializePageSettings() {
+    console.log('بدء تهيئة إعدادات الصفحة...');
+    
+    // تطبيق اللغة أولاً (لأنها قد تؤثر على التوجيه)
+    detectAndApplyLanguage();
+    
+    // ثم تطبيق الوضع
+    detectAndApplyTheme();
+    
+    console.log('تم تهيئة إعدادات الصفحة بنجاح');
+}
+
+// إضافة استماع لحدث تحميل الصفحة (نسخة واحدة فقط)
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('تم تحميل DOM');
+    initializePageSettings();
+});
+
+// استماع إضافي لحدث تحميل الصفحة بالكامل
+window.addEventListener('load', function() {
+    console.log('تم تحميل الصفحة بالكامل');
+});       
+        // تحميل اللغة المفضلة عند فتح الصفحة
+      //  document.addEventListener('DOMContentLoaded', function() {
+          //  const savedLang = localStorage.getItem('preferred-language') || 'ar';
+        //    changeLanguage(savedLang);
+      //  });
+    </script>
+</body>
+</html>

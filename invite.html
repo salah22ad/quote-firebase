@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <title>دعوة لاستخدام تطبيق إنشاء عروض أسعار</title>
+    <link rel="icon" href="https://haddad-inc.github.io/info/qoute-icon.png" type="image/x-icon">
+ 
+    <style>
+        :root {
+            --primary-color: #4ECDC4;
+            --secondary-color: #FF6B6B;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --dark-bg: #1a1a1a;
+            --dark-text: #ffffff;
+            --dark-container: #2d2d2d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .reward {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+        }
+
+        .button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #8a919c;
+            margin-top: 20px;
+        }
+
+        .countdown {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Language Switcher Styles */
+        .language-switcher {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50px;
+            padding: 8px 12px;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            min-width: 150px;
+            margin-top: 5px;
+            overflow: hidden;
+            z-index: 1001;
+        }
+
+        .lang-dropdown.show {
+            display: block;
+        }
+
+        .lang-option {
+            padding: 12px 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .lang-option:last-child {
+            border-bottom: none;
+        }
+
+        .lang-option:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .button {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+
+            .language-switcher {
+                position: static;
+                margin-bottom: 15px;
+                display: flex;
+                justify-content: center;
+            }
+
+            .lang-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+
+            .lang-dropdown {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Styles for LTR languages */
+        [dir="ltr"] {
+            text-align: left;
+        }
+
+        [dir="ltr"] .language-switcher {
+            right: 15px;
+            left: auto;
+        }
+
+        [dir="ltr"] .lang-dropdown {
+            right: 0;
+            left: auto;
+        }
+
+        /* Dark Mode Styles */
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: var(--dark-text);
+        }
+
+        [data-theme="dark"] .container {
+            background-color: var(--dark-container);
+            color: var(--dark-text);
+        }
+
+        [data-theme="dark"] p {
+            color: #cccccc;
+        }
+
+        [data-theme="dark"] .countdown {
+            color: #cccccc;
+        }
+
+        [data-theme="dark"] .footer {
+            color: #aaaaaa;
+        }
+
+        [data-theme="dark"] .lang-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--dark-text);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        [data-theme="dark"] .lang-dropdown {
+            background: var(--dark-container);
+            border: 1px solid #444;
+        }
+
+        [data-theme="dark"] .lang-option {
+            color: var(--dark-text);
+            border-bottom: 1px solid #444;
+        }
+
+        [data-theme="dark"] .lang-option:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="language-switcher">
+        <button class="lang-btn" id="lang-btn">
+            <i class="fas fa-globe"></i>
+            <span id="current-lang">العربية</span>
+        </button>
+        <div class="lang-dropdown" id="lang-dropdown">
+            <div class="lang-option" data-lang="ar">العربية</div>
+            <div class="lang-option" data-lang="en">English</div>
+            <div class="lang-option" data-lang="fr">Français</div>
+            <div class="lang-option" data-lang="es">Español</div>
+            <div class="lang-option" data-lang="de">Deutsch</div>
+            <div class="lang-option" data-lang="tr">Türkçe</div>
+            <div class="lang-option" data-lang="ru">Русский</div>
+        </div>
+    </div>
+
+    <img src="https://haddad-inc.github.io/info/qoute-icon.png" alt="شعار التطبيق" class="logo">
+    <h1 id="title">لقد تمت دعوتك!</h1>
+    <p id="description">صديقك يدعوك لتجربة تطبيق "إنشاء عروض أسعار"، أفضل طريقة لإنشاء عروض أسعار احترافية ومن هاتفك.</p>
+  
+
+    <div id="app-section">
+        <button id="open-app-btn" class="button">افتح التطبيق الان</button>
+        <p class="countdown" id="countdown">سيتم التوجيه تلقائياً خلال <span id="countdown-number">5</span> ثواني</p>
+    </div>
+
+    <div id="download-section" style="display: none;">
+        <p id="download-text">يبدو أن التطبيق غير مثبت على جهازك</p>
+        <button id="download-btn" class="button">تنزيل التطبيق الآن</button>
+    </div>
+
+    <p class="footer" id="privacy-text">باستخدامك لهذا الرابط، فإنك توافق على <a href="https://haddad-inc.github.io/qoutes_page/qoutes_privacy_policy.html" target="_blank">سياسة الخصوصية</a></p>
+</div>
+
+<script>
+    // ترجمة النصوص للغات المختلفة
+    const translations = {
+        ar: {
+            "current-lang": "العربية",
+            "title": "لقد تمت دعوتك!",
+            "description": "صديقك يدعوك لتجربة تطبيق 'إنشاء عروض أسعار'، افضل طريقة لإنشاء عروض اسعار احترافية ومن هاتفك .",
+            "openApp": "افتح التطبيق الان",
+            "countdown": "سيتم التوجيه تلقائياً خلال {countdown} ثواني",
+            "downloadText": "يبدو أن التطبيق غير مثبت على جهازك",
+            "downloadBtn": "تنزيل التطبيق الآن",
+            "privacyText": "باستخدامك لهذا الرابط، فإنك توافق على"
+        },
+        en: {
+            "current-lang": "English",
+            "title": "You've been invited!",
+            "description": "Your friend invites you to try the 'Create Quotations' app — the best way to create professional quotes right from your phone.",
+            "openApp": "Open the app now",
+            "countdown": "Automatic redirect in {countdown} seconds",
+            "downloadText": "It seems the app is not installed on your device",
+            "downloadBtn": "Download the app now",
+            "privacyText": "By using this link, you agree to the"
+        },
+        es: {
+            "current-lang": "Español",
+            "title": "¡Has sido invitado!",
+            "description": "Tu amigo te invita a probar la aplicación 'Crear Cotizaciones', la mejor manera de crear cotizaciones profesionales desde tu teléfono.",
+            "openApp": "Abre la aplicación ahora",
+            "countdown": "Redirección automática en {countdown} segundos",
+            "downloadText": "Parece que la aplicación no está instalada en tu dispositivo",
+            "downloadBtn": "Descargar la aplicación ahora",
+            "privacyText": "Al usar este enlace, aceptas la"
+        },
+        fr: {
+            "current-lang": "Français",
+            "title": "Vous avez été invité !",
+            "description": "Votre ami vous invite à essayer l'application 'Créer des devis' - la meilleure façon de créer des devis professionnels depuis votre téléphone.",
+            "openApp": "Ouvrir l'application maintenant",
+            "countdown": "Redirection automatique dans {countdown} secondes",
+            "downloadText": "Il semble que l'application ne soit pas installée sur votre appareil",
+            "downloadBtn": "Télécharger l'application maintenant",
+            "privacyText": "En utilisant ce lien, vous acceptez la"
+        },
+        de: {
+            "current-lang": "Deutsch",
+            "title": "Sie wurden eingeladen!",
+            "description": "Ihr Freund lädt Sie ein, die 'Angebote erstellen' App auszuprobieren - der beste Weg, professionelle Angebote direkt von Ihrem Telefon zu erstellen.",
+            "openApp": "App jetzt öffnen",
+            "countdown": "Automatische Weiterleitung in {countdown} Sekunden",
+            "downloadText": "Es scheint, dass die App nicht auf Ihrem Gerät installiert ist",
+            "downloadBtn": "App jetzt herunterladen",
+            "privacyText": "Durch die Nutzung dieses Links stimmen Sie der"
+        },
+        tr: {
+            "current-lang": "Türkçe",
+            "title": "Davet edildiniz!",
+            "description": "Arkadaşınız sizi 'Teklif Oluştur' uygulamasını denemeye davet ediyor - telefonunuzdan profesyonel teklifler oluşturmanın en iyi yolu.",
+            "openApp": "Uygulamayı şimdi aç",
+            "countdown": "{countdown} saniye içinde otomatik yönlendirme",
+            "downloadText": "Görünüşe göre uygulama cihazınızda yüklü değil",
+            "downloadBtn": "Uygulamayı şimdi indir",
+            "privacyText": "Bu bağlantıyı kullanarak, aşağıdakileri kabul etmiş olursunuz"
+        },
+        ru: {
+            "current-lang": "Русский",
+            "title": "Вы были приглашены!",
+            "description": "Ваш друг приглашает вас попробовать приложение 'Создание котировок' - лучший способ создавать профессиональные котировки прямо с вашего телефона.",
+            "openApp": "Открыть приложение сейчас",
+            "countdown": "Автоматическое перенаправление через {countdown} секунд",
+            "downloadText": "Похоже, приложение не установлено на вашем устройстве",
+            "downloadBtn": "Скачать приложение сейчас",
+            "privacyText": "Используя эту ссылку, вы соглашаетесь с"
+        }
+    };
+
+    // تهيئة جميع العناصر والمتغيرات
+    let currentLanguage = 'ar';
+    let countdownInterval;
+    
+    // العناصر التفاعلية
+    const langBtn = document.getElementById('lang-btn');
+    const langDropdown = document.getElementById('lang-dropdown');
+    const currentLangElement = document.getElementById('current-lang');
+    const openAppBtn = document.getElementById('open-app-btn');
+    const downloadBtn = document.getElementById('download-btn');
+
+    // إدارة dropdown اللغة
+    function setupLanguageDropdown() {
+        // فتح/إغلاق dropdown
+        langBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            langDropdown.classList.toggle('show');
+        });
+        
+        // إغلاق dropdown عند النقر خارجها
+        document.addEventListener('click', function(e) {
+            if (!langDropdown.contains(e.target) && e.target !== langBtn) {
+                langDropdown.classList.remove('show');
+            }
+        });
+        
+        // منع إغلاق dropdown عند النقر داخلها
+        langDropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // تغيير اللغة عند اختيارها
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                const selectedLang = this.getAttribute('data-lang');
+                changeLanguage(selectedLang);
+                langDropdown.classList.remove('show');
+            });
+        });
+    }
+
+    // دالة تغيير اللغة
+    function changeLanguage(lang) {
+        if (!translations[lang]) return;
+        
+        currentLanguage = lang;
+        
+        // تحديث النص الحالي للغة
+        currentLangElement.textContent = translations[lang]["current-lang"];
+        
+        // تحديث جميع العناصر النصية
+        document.getElementById('title').textContent = translations[lang]["title"];
+        document.getElementById('description').textContent = translations[lang]["description"];
+        openAppBtn.textContent = translations[lang]["openApp"];
+        document.getElementById('download-text').textContent = translations[lang]["downloadText"];
+        downloadBtn.textContent = translations[lang]["downloadBtn"];
+        
+        // تحديث نص الخصوصية مع الرابط
+        const privacyLinkText = getPrivacyLinkText(lang);
+        document.getElementById('privacy-text').innerHTML = 
+            `${translations[lang]["privacyText"]} <a href="https://haddad-inc.github.io/qoutes_page/qoutes_privacy_policy.html" target="_blank">${privacyLinkText}</a>`;
+        
+        // تحديث نص العد التنازلي
+        updateCountdownText();
+        
+        // تغيير اتجاه النص للغات المختلفة
+        if (lang === 'ar') {
+            document.documentElement.dir = 'rtl';
+            document.documentElement.lang = 'ar';
+        } else {
+            document.documentElement.dir = 'ltr';
+            document.documentElement.lang = lang;
+        }
+        
+        // حفظ اللغة المفضلة
+        localStorage.setItem('preferred-language', lang);
+        
+        console.log('تم تغيير اللغة إلى:', lang);
+    }
+
+    // دالة للحصول على نص رابط الخصوصية بناءً على اللغة
+    function getPrivacyLinkText(lang) {
+        const privacyLinks = {
+            'ar': 'سياسة الخصوصية',
+            'en': 'Privacy Policy',
+            'es': 'Política de Privacidad',
+            'fr': 'Politique de Confidentialité',
+            'de': 'Datenschutzrichtlinie',
+            'tr': 'Gizlilik Politikası',
+            'ru': 'Политика Конфиденциальности'
+        };
+        return privacyLinks[lang] || 'Privacy Policy';
+    }
+
+    // تحديث نص العد التنازلي
+    function updateCountdownText() {
+        const countdownEl = document.getElementById('countdown');
+        const countdownNum = document.getElementById('countdown-number').textContent;
+        countdownEl.innerHTML = translations[currentLanguage].countdown.replace('{countdown}', '<span id="countdown-number">' + countdownNum + '</span>');
+    }
+
+    // دالة للكشف عن وضع الهاتف (فاتح أو داكن) وتطبيقه
+    function detectAndApplyTheme() {
+        const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (isDarkMode) {
+            applyDarkTheme();
+        } else {
+            applyLightTheme();
+        }
+        
+        // الاستماع للتغييرات في وضع النظام
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (e.matches) {
+                applyDarkTheme();
+            } else {
+                applyLightTheme();
+            }
+        });
+    }
+
+    // دالة لتطبيق الوضع الداكن
+    function applyDarkTheme() {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        console.log('تم تطبيق الوضع الداكن');
+    }
+
+    // دالة لتطبيق الوضع الفاتح
+    function applyLightTheme() {
+        document.documentElement.setAttribute('data-theme', 'light');
+        console.log('تم تطبيق الوضع الفاتح');
+    }
+
+    // دالة للكشف عن لغة الهاتف وتطبيق اللغة المناسبة
+    function detectAndApplyLanguage() {
+        // أولاً: التحقق من وجود لغة محفوظة مسبقاً
+        const savedLang = localStorage.getItem('preferred-language');
+        if (savedLang && translations[savedLang]) {
+            changeLanguage(savedLang);
+            console.log('تم استخدام اللغة المحفوظة:', savedLang);
+            return;
+        }
+        
+        // ثانياً: إذا لم توجد لغة محفوظة، نكتشف لغة الجهاز
+        const userLanguage = getDeviceLanguage();
+        
+        // اللغات المدعومة في التطبيق
+        const supportedLanguages = ['ar', 'en', 'fr', 'es', 'de', 'tr', 'ru'];
+        
+        console.log('لغة الجهاز المكتشفة:', userLanguage);
+        
+        // التحقق إذا كانت لغة الجهاز مدعومة
+        if (supportedLanguages.includes(userLanguage) && translations[userLanguage]) {
+            // إذا كانت مدعومة، استخدم لغة الجهاز
+            changeLanguage(userLanguage);
+            console.log(`تم تطبيق لغة الجهاز: ${userLanguage}`);
+        } else {
+            // إذا لم تكن مدعومة، استخدم الإنجليزية كافتراضي
+            changeLanguage('en');
+            console.log('لغة الجهاز غير مدعومة، تم استخدام الإنجليزية كافتراضي');
+        }
+    }
+
+    // دالة محسنة للحصول على لغة الجهاز
+    function getDeviceLanguage() {
+        let detectedLang = 'en'; // قيمة افتراضية
+        
+        try {
+            // المحاولة الأولى: navigator.language
+            if (navigator.language) {
+                detectedLang = navigator.language.split('-')[0].toLowerCase();
+                console.log('navigator.language:', navigator.language, '->', detectedLang);
+            }
+            
+            // المحاولة الثانية: navigator.languages
+            if ((detectedLang === 'en' || !supportedLanguages.includes(detectedLang)) && 
+                navigator.languages && navigator.languages.length > 0) {
+                detectedLang = navigator.languages[0].split('-')[0].toLowerCase();
+                console.log('navigator.languages[0]:', navigator.languages[0], '->', detectedLang);
+            }
+            
+            // المحاولة الثالثة: navigator.userLanguage
+            if ((detectedLang === 'en' || !supportedLanguages.includes(detectedLang)) && 
+                navigator.userLanguage) {
+                detectedLang = navigator.userLanguage.split('-')[0].toLowerCase();
+                console.log('navigator.userLanguage:', navigator.userLanguage, '->', detectedLang);
+            }
+        } catch (error) {
+            console.error('خطأ في كشف لغة الجهاز:', error);
+            detectedLang = 'en';
+        }
+        
+        return detectedLang;
+    }
+
+    // دالة لتهيئة جميع الإعدادات عند تحميل الصفحة
+    function initializePageSettings() {
+        console.log('بدء تهيئة إعدادات الصفحة...');
+        
+        // إعداد dropdown اللغة أولاً
+        setupLanguageDropdown();
+        
+        // ثم تطبيق اللغة
+        detectAndApplyLanguage();
+        
+        // ثم تطبيق الوضع
+        detectAndApplyTheme();
+        
+        console.log('تم تهيئة إعدادات الصفحة بنجاح');
+    }
+
+    // دالة العد التنازلي والتوجيه
+    function setupCountdownAndRedirect() {
+        // استخراج كود الدعوة من الرابط
+        const urlParams = new URLSearchParams(window.location.search);
+        const inviteCode = urlParams.get('ref');
+
+        let countdown = 5;
+        const countdownElement = document.getElementById('countdown-number');
+
+        // إعداد العد التنازلي
+        countdownInterval = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+            
+            // تحديث نص العد التنازلي باللغة الحالية
+            updateCountdownText();
+
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                redirectToApp(inviteCode);
+            }
+        }, 1000);
+
+        // إعداد مستمعي الأحداث للأزرار
+        openAppBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            clearInterval(countdownInterval);
+            redirectToApp(inviteCode);
+        });
+
+        downloadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            redirectToDownload(inviteCode);
+        });
+
+        // تتبع حدث فتح رابط الدعوة
+        if (inviteCode) {
+            // إرسال بيانات التتبع إلى السيرفر
+            fetch('https://your-backend.com/track-referral', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    referrer_id: inviteCode,
+                    event: 'referral_link_opened',
+                    timestamp: new Date().toISOString()
+                })
+            }).catch(error => console.log('Tracking error:', error));
+        }
+    }
+
+    function redirectToApp(inviteCode) {
+        clearInterval(countdownInterval);
+
+        if (inviteCode) {
+            // محاولة فتح التطبيق
+            window.location.href = `makequotes://invite?ref=${inviteCode}`;
+
+            // إذا لم يفتح التطبيق خلال 2 ثانية، عرض خيار التنزيل
+            setTimeout(() => {
+                document.getElementById('app-section').style.display = 'none';
+                document.getElementById('download-section').style.display = 'block';
+            }, 2000);
+        } else {
+            redirectToDownload(inviteCode);
+        }
+    }
+
+    function redirectToDownload(inviteCode) {
+        let downloadUrl = "https://play.google.com/store/apps/details?id=com.hpp.makequotes";
+
+        if (inviteCode) {
+            downloadUrl += `?ref=${inviteCode}`;
+        }
+
+        window.location.href = downloadUrl;
+    }
+
+    // اللغات المدعومة
+    const supportedLanguages = ['ar', 'en', 'fr', 'es', 'de', 'tr', 'ru'];
+
+    // إضافة استماع لحدث تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        initializePageSettings();
+        setupCountdownAndRedirect();
+    });
+</script>
+</body>
+</html>
