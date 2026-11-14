@@ -1,192 +1,134 @@
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-admin.initializeApp();
+const functions = require('firebase-functions/v1');
+const admin = require('firebase-admin');
+const { Translate } = require('@google-cloud/translate').v2;
 
-// ترجمة الرسائل للغات المختلفة
-const messages = {
-  ar: {
-    success: "تم حذف حسابك بنجاح. نأسف لرحيلك!",
-    error: "حدث خطأ أثناء حذف الحساب. يرجى المحاولة مرة أخرى أو التواصل مع الدعم.",
-    notFound: "لم يتم العثور على الحساب.",
-    confirm: "هل أنت متأكد تماماً من أنك تريد حذف حسابك نهائياً؟ هذه العملية لا يمكن التراجع عنها.",
-  },
-  en: {
-    success: "Your account has been successfully deleted. We're sorry to see you go!",
-    error: "An error occurred while deleting the account. Please try again or contact support.",
-    notFound: "Account not found.",
-    confirm: "Are you absolutely sure you want to permanently delete your account? This process cannot be undone.",
-  },
-  fr: {
-    success: "Votre compte a été supprimé avec succès. Nous sommes désolés de vous voir partir!",
-    error: "Une erreur s'est produite lors de la suppression du compte. Veuillez réessayer ou contacter le support.",
-    notFound: "Compte non trouvé.",
-    confirm: "Êtes-vous absolument sûr de vouloir supprimer définitivement votre compte ? Ce processus ne peut pas être annulé.",
-  },
-  es: {
-    success: "Su cuenta ha sido eliminada exitosamente. ¡Lamentamos verle irse!",
-    error: "Ocurrió un error al eliminar la cuenta. Por favor, inténtelo de nuevo o contacte al soporte.",
-    notFound: "Cuenta no encontrada.",
-    confirm: "¿Está absolutamente seguro de que desea eliminar permanentemente su cuenta? Este proceso no se puede deshacer.",
-  },
-  de: {
-    success: "Ihr Konto wurde erfolgreich gelöscht. Es tut uns leid, dass Sie gehen!",
-    error: "Beim Löschen des Kontos ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut ou kontaktieren Sie den Support.",
-    notFound: "Konto nicht gefunden.",
-    confirm: "Sind Sie absolut sicher, dass Sie Ihr Konto dauerhaft löschen möchten? Dieser Vorgang kann nicht rückgängig gemacht werden.",
-  },
-  tr: {
-    success: "Hesabınız başarıyla silindi. Gittiğiniz için üzgünüz!",
-    error: "Hesap silinirken bir hata oluştu. Lütfen tekrar deneyin veya destekle iletişime geçin.",
-    notFound: "Hesap bulunamadı.",
-    confirm: "Hesabınızı kalıcı olarak silmek istediğinizden kesinlikle emin misiniz? Bu işlem geri alınamaz.",
-  },
-  ru: {
-    success: "Ваш аккаунт был успешно удален. Нам жаль, что вы уходите!",
-    error: "Произошла ошибка при удалении аккаунта. Пожалуйста, попробуйте снова или свяжитесь с поддержкой.",
-    notFound: "Аккаунт не найден.",
-    confirm: "Вы абсолютно уверены, что хотите навсегда удалить свой аккаунт? Этот процесс нельзя отменить.",
-  },
-};
+const translate = new Translate();
 
-// دالة مساعدة للحصول على الرسائل
-function getMessage(language, key) {
-  if (messages[language] && messages[language][key]) {
-    return messages[language][key];
-  }
-  // Fallback to English if language or key not found
-  return messages.en[key] || key;
+if (admin.apps.length === 0) {
+  admin.initializeApp();
 }
 
-// دالة حذف الحساب
-exports.deleteUserAccount = functions.https.onCall(async (data, context) => {
-  // التحقق من المصادقة
-  if (!context.auth) {
-    throw new functions.https.HttpsError("unauthenticated", "يجب تسجيل الدخول أولاً");
-  }
+// 1) استيراد دوال إدارة الحسابات (deleteUserAccount & checkUserDeletionStatus)
+try {
+  const authManagement = require('./auth_management');
+  exports.deleteUserAccount = authManagement.deleteUserAccount;
+  exports.checkUserDeletionStatus = authManagement.checkUserDeletionStatus;
+} catch (e) {
+  console.log('تنبيه: ملف auth_management.js غير موجود.');
+}
 
-  const uid = data.uid;
-  const userLanguage = data.language || "en";
+// 2) استيراد دوال Admin Web Panel
+try {
+  const adminApi = require('./admin_api');
+  Object.keys(adminApi).forEach(key => {
+    exports[key] = adminApi[key];
+  });
+} catch (e) {
+  console.error('فشل تحميل admin_api.js:', e);
+}
 
-  // التحقق من UID
-  if (!uid) {
-    return {
-      success: false,
-      error: getMessage(userLanguage, "notFound"),
-    };
-  }
+// 3) دالة الإشعارات العامة المترجمة (مطابقة لمبدأ محفظتي)
+exports.sendGeneralTralatedNotification = functions.firestore
+  .document('global_translate_notifications/{docId}')
+  .onCreate(async (snapshot, context) => {
+    const data = snapshot.data();
+    const docId = context.params.docId;
 
-  // التحقق من أن المستخدم يحاول حذف حسابه فقط
-  if (context.auth.uid !== uid) {
-    throw new functions.https.HttpsError("permission-denied", "غير مصرح بحذف حسابات أخرى");
-  }
+    const originalTitle = data.title || data.originalTitle;
+    const originalMessage = data.message || data.originalMessage || data.body;
+    const type = data.type || 'MainActivity';
+    const webUrl = data.webUrl || '';
 
-  try {
-    // 1. الحصول على بيانات المستخدم قبل الحذف
-    let userEmail = "unknown";
-    try {
-      const userRecord = await admin.auth().getUser(uid);
-      userEmail = userRecord.email || "unknown";
-    } catch (error) {
-      console.warn("Could not fetch user data from Auth:", error);
+    if (!originalTitle || !originalMessage) {
+      console.error(`❌ [${docId}] Missing title or message. Deleting document.`);
+      await snapshot.ref.delete();
+      return null;
     }
 
-    // 2. حذف مستند المستخدم من مجموعة users
-    await admin.firestore().collection("users").doc(uid).delete();
-    console.log("User document deleted successfully");
+    // اللغات المعتمدة للترجمة
+    const targetLanguages = ['en', 'de', 'fr', 'es', 'ru', 'hi', 'zh', 'tr'];
+    let arabicSent = false;
+    let successCount = 0;
 
-    // 3. حذف الإشعارات المرتبطة بالمستخدم من مجموعة referral_notifications
-    const notificationsQuery = admin.firestore().collection("referral_notifications")
-        .where("targetUid", "==", uid);
-
-    const notificationsSnapshot = await notificationsQuery.get();
-    const deleteNotificationsPromises = notificationsSnapshot.docs.map((doc) =>
-      doc.ref.delete(),
-    );
-    await Promise.all(deleteNotificationsPromises);
-    console.log("Referral notifications deleted successfully");
-
-    // 4. حذف المستخدم من Authentication
-    await admin.auth().deleteUser(uid);
-    console.log("User deleted from Authentication");
-
-    // 5. إضافة سجل الحذف في مجموعة deletionLogs
-    await admin.firestore().collection("deletionLogs").add({
-      userId: uid,
-      email: userEmail,
-      language: userLanguage,
-      deleted_at: admin.firestore.FieldValue.serverTimestamp(),
-      type: "user_initiated",
-      status: "completed",
-    });
-    console.log("Deletion log added successfully");
-
-    return {
-      success: true,
-      message: getMessage(userLanguage, "success"),
-      email: userEmail,
-      language: userLanguage,
-    };
-  } catch (error) {
-    console.error("Error deleting account:", error);
-
-    // تسجيل فشل الحذف
     try {
-      await admin.firestore().collection("deletionLogs").add({
-        userId: uid,
-        email: "unknown",
-        language: userLanguage,
-        deleted_at: admin.firestore.FieldValue.serverTimestamp(),
-        type: "user_initiated",
-        status: "failed",
-        error_message: error.message,
+      // 1. إرسال الإشعار العربي الأصلي لقناة global_ar
+      try {
+        await admin.messaging().send({
+          data: {
+            title: originalTitle,
+            message: originalMessage,
+            type: type,
+            webUrl: webUrl
+          },
+          android: { priority: 'high' },
+          topic: 'global_ar'
+        });
+        arabicSent = true;
+        console.log(`✅ [${docId}] Arabic notification sent to topic global_ar`);
+      } catch (arError) {
+        console.error(`❌ [${docId}] Failed to send Arabic:`, arError.message);
+      }
+
+      // 2. ترجمة وإرسال بقية اللغات
+      for (const lang of targetLanguages) {
+        try {
+          const [translations] = await translate.translate(
+            [originalTitle, originalMessage],
+            lang
+          );
+
+          await admin.messaging().send({
+            data: {
+              title: translations[0] || originalTitle,
+              message: translations[1] || originalMessage,
+              type: type,
+              webUrl: webUrl
+            },
+            android: { priority: 'high' },
+            topic: `global_${lang}`
+          });
+          successCount++;
+          console.log(`✅ [${docId}] Sent to topic global_${lang}`);
+        } catch (langError) {
+          console.error(`❌ [${docId}] Error for language ${lang}:`, langError.message);
+        }
+      }
+
+      // 3. حذف الوثيقة بعد المعالجة لمنع تكرارها
+      await snapshot.ref.delete();
+      console.log(`✅ [${docId}] Completed. Arabic: ${arabicSent}, Translated: ${successCount}/${targetLanguages.length}`);
+      return null;
+    } catch (fatalError) {
+      console.error(`❌ [${docId}] Fatal error:`, fatalError);
+      return null;
+    }
+  });
+
+// 4) دالة إشعارات المدراء التجريبية (بدون ترجمة)
+exports.sendAdminTranslateNotification = functions.firestore
+  .document('admin_notifications/{docId}')
+  .onCreate(async (snapshot, context) => {
+    const data = snapshot.data();
+    const title = data.originalTitle || data.title || '';
+    const message = data.originalMessage || data.message || '';
+    const type = data.type || 'MainActivity';
+    const webUrl = data.webUrl || '';
+
+    try {
+      await admin.messaging().send({
+        data: {
+          title: title,
+          message: message,
+          type: type,
+          webUrl: webUrl
+        },
+        android: { priority: 'high' },
+        topic: 'admins'
       });
-    } catch (logError) {
-      console.error("Error logging failed deletion:", logError);
+      console.log('تم إرسال إشعار الإدارة بنجاح');
+      return snapshot.ref.delete();
+    } catch (error) {
+      console.error('Error in sendAdminTranslateNotification:', error);
+      return null;
     }
-
-    return {
-      success: false,
-      error: getMessage(userLanguage, "error"),
-    };
-  }
-});
-
-// دالة للتحقق من حالة الحساب قبل التسجيل
-exports.checkUserDeletionStatus = functions.https.onCall(async (data, context) => {
-  const {email} = data;
-
-  if (!email) {
-    throw new functions.https.HttpsError("invalid-argument", "البريد الإلكتروني مطلوب");
-  }
-
-  try {
-    const db = admin.firestore();
-
-    // البحث في deletionLogs باستخدام البريد الإلكتروني
-    const deletionLogsRef = db.collection("deletionLogs");
-    const snapshot = await deletionLogsRef
-        .where("email", "==", email.toLowerCase())
-        .where("status", "==", "completed")
-        .orderBy("deleted_at", "desc")
-        .limit(1)
-        .get();
-
-    if (snapshot.empty) {
-      return {
-        isDeleted: false,
-        message: "الحساب نشط",
-      };
-    } else {
-      const deletionData = snapshot.docs[0].data();
-      return {
-        isDeleted: true,
-        message: "تم حذف هذا الحساب",
-        deletionDate: deletionData.deleted_at,
-        reason: deletionData.reason,
-      };
-    }
-  } catch (error) {
-    console.error("Error checking user deletion status:", error);
-    throw new functions.https.HttpsError("internal", "خطأ في التحقق من حالة الحساب");
-  }
-});
+  });

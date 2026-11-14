@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تفعيل البريميوم — Quotes Pro Admin</title>
+  <link rel="icon" href="/images/app_icon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <script type="module">
+    import { requireAuth, mountShell, callFunction, toast, withLoading } from "/js/common.js";
+
+    (async () => {
+      await requireAuth();
+      mountShell("/premium", "تفعيل النسخة البريميوم", "تفعيل أو تمديد اشتراك بريميوم لمستخدم بالبريد الإلكتروني");
+      document.getElementById("pageBody").innerHTML = `
+        <div class="card" style="max-width:720px;">
+          <div class="card__header"><div class="card__title"><span class="card__title-icon">⭐</span> تفعيل بريميوم</div></div>
+          <div class="card__body">
+            <form id="premiumForm">
+              <div class="form-group"><label class="form-label" for="email">البريد الإلكتروني للمستخدم *</label><input class="form-control" type="email" id="email" required placeholder="user@example.com" /></div>
+              <div class="form-group"><label class="form-label">نوع الخطة *</label><div class="radio-group" id="planGroup"><label class="radio-card is-checked"><input type="radio" name="plan" value="monthly-manual" checked /><span>📅 شهري</span></label><label class="radio-card"><input type="radio" name="plan" value="yearly-manual" /><span>📆 سنوي</span></label><label class="radio-card"><input type="radio" name="plan" value="lifetime" /><span>♾️ مدى الحياة</span></label></div></div>
+              <div class="form-group" id="monthsGroup"><label class="form-label" for="months">عدد الأشهر (للخطة الشهرية)</label><input class="form-control" type="number" id="months" min="1" max="120" value="1" /></div>
+              <button type="submit" class="btn btn--success btn--block btn--lg" id="btnActivate"><span>⭐</span> تفعيل البريميوم</button>
+            </form>
+            <div id="resultBox" class="mt-4"></div>
+          </div>
+        </div>
+      `;
+      document.querySelectorAll("#planGroup .radio-card").forEach(card => {
+        card.addEventListener("click", () => {
+          document.querySelectorAll("#planGroup .radio-card").forEach(c => c.classList.remove("is-checked"));
+          card.classList.add("is-checked");
+          card.querySelector("input").checked = true;
+          document.getElementById("monthsGroup").style.display = card.querySelector("input").value === "monthly-manual" ? "block" : "none";
+        });
+      });
+      document.getElementById("premiumForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = document.getElementById("email").value.trim();
+        const planType = document.querySelector('input[name="plan"]:checked').value;
+        const months = parseInt(document.getElementById("months").value) || 1;
+        const btn = document.getElementById("btnActivate");
+        const resultBox = document.getElementById("resultBox");
+        resultBox.innerHTML = "";
+        if (!email) { toast("يرجى إدخال البريد الإلكتروني", "warning"); return; }
+        try {
+          const data = await withLoading(btn, () => callFunction("activateUserPremium", { email, planType, months }));
+          resultBox.innerHTML = `<div class="alert alert--success"><span class="alert__icon">✓</span><div class="alert__body"><div class="alert__title">تم التفعيل بنجاح</div>${data.message}<br><small>ينتهي في: <strong>${new Date(data.expiry).toLocaleDateString("ar-EG")}</strong></small></div></div>`;
+          toast("تم تفعيل البريميوم بنجاح", "success");
+          document.getElementById("email").value = "";
+        } catch (err) {
+          resultBox.innerHTML = `<div class="alert alert--error">${err.message}</div>`;
+          toast(err.message, "error");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

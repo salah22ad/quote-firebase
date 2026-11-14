@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إرسال إشعار مترجم — Quotes Pro Admin</title>
+  <link rel="icon" href="/images/app_icon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <script type="module">
+    import { requireAuth, mountShell, callFunction, toast, withLoading } from "/js/common.js";
+
+    (async () => {
+      await requireAuth();
+      mountShell("/notifications", "إرسال إشعار عام مترجم", "يُكتب بالعربية ويُترجم تلقائياً إلى الإنجليزية، الألمانية، الفرنسية، الإسبانية، الروسية، الهندية، الصينية، والتركية");
+
+      document.getElementById("pageBody").innerHTML = `
+        <div class="card" style="max-width:780px;">
+          <div class="card__header">
+            <div class="card__title"><span class="card__title-icon">🔔</span> إعداد الإشعار</div>
+          </div>
+          <div class="card__body">
+            <div class="alert alert--info">
+              <span class="alert__icon">🌍</span>
+              <div class="alert__body">
+                يصل الإشعار بتصميم النظام الافتراضي لتطبيق عروض الأسعار بلغة التطبيق لدى كل مستخدم (أو الإنجليزية للغات غير المدرجة)، ولا يصل للمستخدمين الجدد الذين يثبّتون التطبيق مستقبلاً.
+              </div>
+            </div>
+
+            <form id="notifForm">
+              <!-- الجمهور المستهدف -->
+              <div class="form-group">
+                <label class="form-label">الجمهور المستهدف</label>
+                <div class="radio-group" id="audienceGroup">
+                  <label class="radio-card is-checked" data-aud="global">
+                    <input type="radio" name="audience" value="global" checked />
+                    <span>🌍 جميع المستخدمين (مترجم لـ 9 لغات)</span>
+                  </label>
+                  <label class="radio-card" data-aud="admins">
+                    <input type="radio" name="audience" value="admins" />
+                    <span>🛡️ الإدارة فقط (إشعار تجريبي)</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- العنوان والنص -->
+              <div class="form-group">
+                <label class="form-label" for="title">عنوان الإشعار (بالعربية) *</label>
+                <input class="form-control" type="text" id="title" required maxlength="100" placeholder="مثال: تحديث جديد في تطبيق إنشاء عروض الأسعار" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="body">نص الإشعار (بالعربية) *</label>
+                <textarea class="form-control" id="body" required rows="4" maxlength="500" placeholder="اكتب تفاصيل الإشعار هنا..."></textarea>
+              </div>
+
+              <!-- وجهة النقر عند فتح الإشعار -->
+              <div class="card mb-4" style="background:#F8FAFC;">
+                <div class="card__body" style="padding:16px;">
+                  <strong style="color:#2563EB;display:block;margin-bottom:12px;">🎯 وجهة التوجيه عند النقر على الإشعار</strong>
+
+                  <div class="radio-group" id="actionGroup" style="flex-direction:column;">
+                    <label class="radio-card is-checked" data-action="MainActivity">
+                      <input type="radio" name="action" value="MainActivity" checked />
+                      <span>🏠 الشاشة الرئيسية للتطبيق (MainActivity)</span>
+                    </label>
+                    <label class="radio-card" data-action="SubscriptionActivity">
+                      <input type="radio" name="action" value="SubscriptionActivity" />
+                      <span>⭐ شاشة الاشتراك والترقية (SubscriptionActivity)</span>
+                    </label>
+                    <label class="radio-card" data-action="screen">
+                      <input type="radio" name="action" value="screen" />
+                      <span>📱 شاشة أخرى داخل التطبيق (قائمة الشاشات)</span>
+                    </label>
+                    <label class="radio-card" data-action="web">
+                      <input type="radio" name="action" value="web" />
+                      <span>🌐 رابط ويب خارجي (URL)</span>
+                    </label>
+                  </div>
+
+                  <!-- قائمة منسدلة لشاشات التطبيق -->
+                  <div class="form-group" id="screenSelectGroup" style="display:none;margin-top:12px;">
+                    <label class="form-label" for="screenDropdown">اختر الشاشة المستهدفة</label>
+                    <select class="form-control" id="screenDropdown">
+                      <option value="QuoteDetailActivity">📝 إنشاء عرض سعر جديد (QuoteDetailActivity)</option>
+                      <option value="MainActivity">🏠 الشاشة الرئيسية وعرض الأسعار (MainActivity)</option>
+                      <option value="SubscriptionActivity">⭐ شاشة الاشتراك (SubscriptionActivity)</option>
+                      <option value="CompanyInfoActivity">🏢 بيانات الشركة (CompanyInfoActivity)</option>
+                      <option value="ItemsActivity">📦 إدارة الأصناف (ItemsActivity)</option>
+                      <option value="CurrenciesActivity">💰 إدارة العملات (CurrenciesActivity)</option>
+                      <option value="QuantityTypesActivity">📏 وحدات القياس (QuantityTypesActivity)</option>
+                      <option value="SupportActivity">📞 الدعم الفني (SupportActivity)</option>
+                      <option value="CUSTOM">⚙️ إدخال اسم كلاس يدوياً...</option>
+                    </select>
+
+                    <div id="customClassInputWrap" style="display:none;margin-top:10px;">
+                      <label class="form-label" for="customClassName">اسم الكلاس (Activity Name)</label>
+                      <input class="form-control" type="text" id="customClassName" placeholder="مثال: SignatureActivity" dir="ltr" />
+                    </div>
+                  </div>
+
+                  <!-- حقل الرابط الخارجي -->
+                  <div class="form-group" id="webUrlGroup" style="display:none;margin-top:12px;">
+                    <label class="form-label" for="webUrl">رابط الويب الخارجي *</label>
+                    <input class="form-control" type="url" id="webUrl" placeholder="https://example.com" dir="ltr" />
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--block btn--lg" id="btnSend">
+                <span>🚀</span> إرسال الإشعار الآن
+              </button>
+            </form>
+
+            <div id="resultBox" class="mt-4"></div>
+          </div>
+        </div>
+      `;
+
+      const bindRadio = (groupId, onChange) => {
+        document.querySelectorAll(`#${groupId} .radio-card`).forEach(c => {
+          c.addEventListener("click", () => {
+            document.querySelectorAll(`#${groupId} .radio-card`).forEach(c2 => c2.classList.remove("is-checked"));
+            c.classList.add("is-checked");
+            c.querySelector("input").checked = true;
+            if (onChange) onChange(c.dataset.action || c.dataset.aud);
+          });
+        });
+      };
+
+      bindRadio("audienceGroup");
+      bindRadio("actionGroup", (val) => {
+        document.getElementById("screenSelectGroup").style.display = (val === "screen") ? "block" : "none";
+        document.getElementById("webUrlGroup").style.display = (val === "web") ? "block" : "none";
+      });
+
+      document.getElementById("screenDropdown").addEventListener("change", (e) => {
+        document.getElementById("customClassInputWrap").style.display = (e.target.value === "CUSTOM") ? "block" : "none";
+      });
+
+      document.getElementById("notifForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const title = document.getElementById("title").value.trim();
+        const body = document.getElementById("body").value.trim();
+        const audience = document.querySelector('input[name="audience"]:checked').value;
+        const action = document.querySelector('input[name="action"]:checked').value;
+
+        if (!title || !body) {
+          toast("يرجى كتابة العنوان ونص الإشعار", "warning");
+          return;
+        }
+
+        let targetType = action;
+        let finalWebUrl = "";
+
+        if (action === "web") {
+          finalWebUrl = document.getElementById("webUrl").value.trim();
+          if (!finalWebUrl) {
+            toast("يرجى إدخال رابط الويب الخارجي", "warning");
+            return;
+          }
+          targetType = "web";
+        } else if (action === "screen") {
+          const selectedScreen = document.getElementById("screenDropdown").value;
+          if (selectedScreen === "CUSTOM") {
+            const customName = document.getElementById("customClassName").value.trim();
+            if (!customName) {
+              toast("يرجى إدخال اسم الكلاس", "warning");
+              return;
+            }
+            targetType = customName;
+          } else {
+            targetType = selectedScreen;
+          }
+        }
+
+        const btn = document.getElementById("btnSend");
+        const resultBox = document.getElementById("resultBox");
+        resultBox.innerHTML = "";
+
+        try {
+          const data = await withLoading(btn, () => callFunction("sendGeneralNotificationCampaign", {
+            title,
+            body,
+            type: targetType,
+            webUrl: finalWebUrl,
+            audience
+          }));
+          resultBox.innerHTML = `<div class="alert alert--success"><span class="alert__icon">✓</span><div class="alert__body"><div class="alert__title">${data.message}</div>الوجهة المحددة: <code>${targetType}</code></div></div>`;
+          toast("تم إرسال الإشعار بنجاح", "success");
+          document.getElementById("title").value = "";
+          document.getElementById("body").value = "";
+        } catch (err) {
+          resultBox.innerHTML = `<div class="alert alert--error">${err.message}</div>`;
+          toast(err.message, "error");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

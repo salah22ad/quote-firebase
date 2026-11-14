@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إدارة حصة العروض (max_quotes) — Quotes Pro Admin</title>
+  <link rel="icon" href="/images/app_icon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <script type="module">
+    import { requireAuth, mountShell, callFunction, toast, withLoading } from "/js/common.js";
+
+    (async () => {
+      await requireAuth();
+      mountShell("/quota", "إدارة حصة عروض الأسعار (max_quotes)", "تحديث الحد الأقصى لعروض الأسعار لقسم users أو guests");
+
+      document.getElementById("pageBody").innerHTML = `
+        <!-- القسم الأول: التحديث الجماعي -->
+        <div class="card mb-6" style="max-width:760px;">
+          <div class="card__header">
+            <div class="card__title"><span class="card__title-icon">👥</span> تحديث جماعي لحصة العروض (max_quotes)</div>
+          </div>
+          <div class="card__body">
+            <div class="alert alert--info">
+              <span class="alert__icon">ℹ</span>
+              <div class="alert__body">
+                اختر القسم المستهدف (<strong>users</strong> للمسجلين أو <strong>guests</strong> للضيوف)، وحدد القيمة الجديدة (الافتراضية <strong>100</strong>). سيتم تحديث السجلات التي تقل حصتها الحالية عن القيمة المدخلة.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">القسم المستهدف (Collection) *</label>
+              <div class="radio-group" id="bulkCollectionGroup">
+                <label class="radio-card is-checked" data-col="users">
+                  <input type="radio" name="bulkCollection" value="users" checked />
+                  <span>👥 المستخدمون المسجلون (users)</span>
+                </label>
+                <label class="radio-card" data-col="guests">
+                  <input type="radio" name="bulkCollection" value="guests" />
+                  <span>👤 الضيوف (guests)</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="bulkMaxQuotes">قيمة max_quotes الجديدة *</label>
+              <input class="form-control" type="number" id="bulkMaxQuotes" min="1" max="100000" value="100" />
+            </div>
+
+            <button type="button" class="btn btn--primary btn--block btn--lg" id="btnBulkFix">
+              <span>🔧</span> تنفيذ التحديث الجماعي
+            </button>
+            <div id="bulkResultBox" class="mt-4"></div>
+          </div>
+        </div>
+
+        <!-- القسم الثاني: تحديث لمستخدم أو ضيف محدد -->
+        <div class="card" style="max-width:760px;">
+          <div class="card__header">
+            <div class="card__title"><span class="card__title-icon">🎯</span> تحديث حصة مستخدم أو ضيف محدد</div>
+          </div>
+          <div class="card__body">
+            <div class="form-group">
+              <label class="form-label">القسم المستهدف (Collection) *</label>
+              <div class="radio-group" id="singleCollectionGroup">
+                <label class="radio-card is-checked" data-col="users">
+                  <input type="radio" name="singleCollection" value="users" checked />
+                  <span>👥 مستخدم مسجل (users)</span>
+                </label>
+                <label class="radio-card" data-col="guests">
+                  <input type="radio" name="singleCollection" value="guests" />
+                  <span>👤 ضيف (guests)</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" id="identifierLabel" for="singleIdentifier">البريد الإلكتروني للمستخدم *</label>
+              <input class="form-control" type="text" id="singleIdentifier" placeholder="user@example.com" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="singleMaxQuotes">قيمة max_quotes الجديدة *</label>
+              <input class="form-control" type="number" id="singleMaxQuotes" min="1" max="100000" value="100" />
+            </div>
+
+            <button type="button" class="btn btn--success btn--block btn--lg" id="btnSingleFix">
+              <span>✓</span> تحديث الحصة الفردية
+            </button>
+            <div id="singleResultBox" class="mt-4"></div>
+          </div>
+        </div>
+      `;
+
+      // تفعيل أزرار الاختيار
+      const bindRadios = (groupId, onChange) => {
+        document.querySelectorAll(`#${groupId} .radio-card`).forEach(card => {
+          card.addEventListener("click", () => {
+            document.querySelectorAll(`#${groupId} .radio-card`).forEach(c => c.classList.remove("is-checked"));
+            card.classList.add("is-checked");
+            card.querySelector("input").checked = true;
+            if (onChange) onChange(card.dataset.col);
+          });
+        });
+      };
+
+      bindRadios("bulkCollectionGroup");
+      bindRadios("singleCollectionGroup", (col) => {
+        const label = document.getElementById("identifierLabel");
+        const input = document.getElementById("singleIdentifier");
+        if (col === "guests") {
+          label.textContent = "معرّف الضيف (guestUID) *";
+          input.placeholder = "أدخل معرّف وثيقة الضيف في guests";
+        } else {
+          label.textContent = "البريد الإلكتروني للمستخدم *";
+          input.placeholder = "user@example.com";
+        }
+      });
+
+      // تنفيذ التحديث الجماعي
+      document.getElementById("btnBulkFix").addEventListener("click", async () => {
+        const collection = document.querySelector('input[name="bulkCollection"]:checked').value;
+        const maxValue = parseInt(document.getElementById("bulkMaxQuotes").value);
+        if (isNaN(maxValue) || maxValue < 1) {
+          toast("يرجى إدخال رقم صحيح أكبر من 0", "warning");
+          return;
+        }
+        if (!confirm(`هل أنت متأكد من تحديث max_quotes إلى ${maxValue} في قسم (${collection})؟`)) return;
+
+        const btn = document.getElementById("btnBulkFix");
+        const resBox = document.getElementById("bulkResultBox");
+        resBox.innerHTML = "";
+
+        try {
+          const res = await withLoading(btn, () => callFunction("fixMaxQuotes", { collection, maxValue }));
+          resBox.innerHTML = `<div class="alert alert--success"><span class="alert__icon">✓</span><div class="alert__body">${res.message}</div></div>`;
+          toast("تم التحديث الجماعي بنجاح", "success");
+        } catch (err) {
+          resBox.innerHTML = `<div class="alert alert--error">${err.message}</div>`;
+          toast(err.message, "error");
+        }
+      });
+
+      // تنفيذ التحديث الفردي
+      document.getElementById("btnSingleFix").addEventListener("click", async () => {
+        const collection = document.querySelector('input[name="singleCollection"]:checked').value;
+        const identifier = document.getElementById("singleIdentifier").value.trim();
+        const maxValue = parseInt(document.getElementById("singleMaxQuotes").value);
+
+        if (!identifier) {
+          toast(collection === "guests" ? "يرجى إدخال معرّف الضيف" : "يرجى إدخال البريد الإلكتروني", "warning");
+          return;
+        }
+        if (isNaN(maxValue) || maxValue < 1) {
+          toast("يرجى إدخال رقم صحيح أكبر من 0", "warning");
+          return;
+        }
+
+        const btn = document.getElementById("btnSingleFix");
+        const resBox = document.getElementById("singleResultBox");
+        resBox.innerHTML = "";
+
+        try {
+          const res = await withLoading(btn, () => callFunction("updateUserMaxQuotes", { collection, identifier, maxValue }));
+          resBox.innerHTML = `<div class="alert alert--success"><span class="alert__icon">✓</span><div class="alert__body">${res.message}</div></div>`;
+          toast("تم تحديث الحصة بنجاح", "success");
+        } catch (err) {
+          resBox.innerHTML = `<div class="alert alert--error">${err.message}</div>`;
+          toast(err.message, "error");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

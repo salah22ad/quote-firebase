@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إدارة الأجهزة المتعددة — Quotes Pro Admin</title>
+  <link rel="icon" href="/images/app_icon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <script type="module">
+    import { requireAuth, mountShell, callFunction, toast, escapeHTML, formatDate } from "/js/common.js";
+
+    let usersData = [];
+
+    (async () => {
+      await requireAuth();
+      mountShell("/devices", "إدارة الأجهزة المتعددة", "المستخدمون الذين لديهم أكثر من جهاز مسجل");
+      document.getElementById("headerActions").innerHTML = `<button class="btn btn--outline" id="btnRefresh"><span>🔄</span> تحديث</button>`;
+      document.getElementById("pageBody").innerHTML = `<div id="usersContainer"></div>`;
+      document.getElementById("btnRefresh").addEventListener("click", loadUsersDevices);
+      await loadUsersDevices();
+    })();
+
+    async function loadUsersDevices() {
+      const container = document.getElementById("usersContainer");
+      container.innerHTML = `<div style="display:flex;justify-content:center;padding:40px;"><div class="spinner spinner--lg"></div></div>`;
+      try {
+        const result = await callFunction("getUsersWithDevices");
+        usersData = result.users || [];
+        renderUsers();
+      } catch (e) {
+        container.innerHTML = `<div class="alert alert--error">${e.message}</div>`;
+        toast(e.message, "error");
+      }
+    }
+
+    function renderUsers() {
+      const container = document.getElementById("usersContainer");
+      if (!usersData.length) {
+        container.innerHTML = `<div class="empty"><div class="empty__icon">📱</div><div class="empty__text">لا يوجد مستخدمون لديهم أكثر من جهاز</div></div>`;
+        return;
+      }
+
+      container.innerHTML = usersData.map((user, userIndex) => `
+        <div class="card user-card mb-4" data-user-index="${userIndex}">
+          <div class="card__body">
+            <div class="flex items-center gap-3 mb-3">
+              <div style="width:44px;height:44px;border-radius:50%;background:var(--md-primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;">${(user.email || "U").charAt(0).toUpperCase()}</div>
+              <div class="flex-1">
+                <strong>${escapeHTML(user.displayName) || "—"}</strong>
+                <div style="font-size:13px;color:var(--text-secondary);">${escapeHTML(user.email)}</div>
+                <div style="font-size:11px;color:var(--text-muted);">📅 التسجيل: ${formatDate(user.created_at)} | العروض: ${user.quotes_count}</div>
+              </div>
+              <div>${user.is_premium ? '<span class="badge badge--success">⭐ بريميوم</span>' : '<span class="badge badge--gray">مجاني</span>'}</div>
+            </div>
+            <div class="table-wrap">
+              <table class="table">
+                <thead><tr><th>اسم الجهاز</th><th>آخر نشاط</th><th>الحالة</th><th>معرّف الجهاز</th><th></th></tr></thead>
+                <tbody>
+                  ${user.devices.map((device, deviceIndex) => `
+                    <tr>
+                      <td>${escapeHTML(device.deviceName)}</td>
+                      <td>${formatDate(device.lastActiveAt)}</td>
+                      <td>${device.active ? '<span class="badge badge--success">نشط</span>' : '<span class="badge badge--gray">غير نشط</span>'}</td>
+                      <td><code style="font-size:11px;">${escapeHTML(device.deviceId).substring(0, 16)}...</code></td>
+                      <td><button class="btn btn--sm btn--danger delete-device" data-uid="${escapeHTML(user.uid)}" data-device-id="${escapeHTML(device.deviceId)}" data-device-name="${escapeHTML(device.deviceName)}">🗑️ حذف</button></td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      document.querySelectorAll(".delete-device").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          const uid = btn.dataset.uid;
+          const deviceId = btn.dataset.deviceId;
+          const deviceName = btn.dataset.deviceName;
+          if (!confirm(`هل أنت متأكد من حذف الجهاز "${deviceName}"؟`)) return;
+          btn.disabled = true;
+          try {
+            await callFunction("deleteUserDevice", { uid, deviceId });
+            toast("تم حذف الجهاز بنجاح", "success");
+            await loadUsersDevices();
+          } catch (err) {
+            toast(err.message, "error");
+            btn.disabled = false;
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>

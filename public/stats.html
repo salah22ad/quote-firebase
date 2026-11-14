@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إحصائيات المستخدمين — Quotes Pro Admin</title>
+  <link rel="icon" href="/images/app_icon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <script type="module">
+    import { requireAuth, mountShell, callFunction, toast } from "/js/common.js";
+
+    (async () => {
+      await requireAuth();
+      mountShell("/stats", "إحصائيات المستخدمين", "نظرة شاملة على مستخدمي وضيوف تطبيق إنشاء عروض الأسعار");
+      document.getElementById("headerActions").innerHTML = `<button class="btn btn--outline" id="btnRefresh"><span>🔄</span> تحديث</button>`;
+      document.getElementById("btnRefresh").addEventListener("click", loadStats);
+      loadStats();
+    })();
+
+    async function loadStats() {
+      const body = document.getElementById("pageBody");
+      body.innerHTML = `<div class="card"><div class="card__body" style="display:flex;align-items:center;justify-content:center;min-height:240px;"><div class="spinner spinner--lg"></div></div></div>`;
+      try {
+        const data = await callFunction("getUserStats");
+        renderStats(data);
+      } catch (e) {
+        toast("فشل تحميل الإحصائيات: " + e.message, "error");
+        body.innerHTML = `<div class="card"><div class="card__body"><div class="alert alert--error">${e.message}</div></div></div>`;
+      }
+    }
+
+    function renderStats(d) {
+      document.getElementById("pageBody").innerHTML = `
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-card__icon stat-card__icon--blue">👥</div><div><div class="stat-card__value">${d.totalUsers ?? 0}</div><div class="stat-card__label">إجمالي المسجلين</div></div></div>
+          <div class="stat-card"><div class="stat-card__icon stat-card__icon--cyan">👤</div><div><div class="stat-card__value">${d.totalGuests ?? 0}</div><div class="stat-card__label">الضيوف</div></div></div>
+          <div class="stat-card"><div class="stat-card__icon stat-card__icon--purple">📊</div><div><div class="stat-card__value">${d.totalAccounts ?? 0}</div><div class="stat-card__label">إجمالي الحسابات</div></div></div>
+          <div class="stat-card"><div class="stat-card__icon stat-card__icon--green">🆕</div><div><div class="stat-card__value">${d.newUsersToday ?? 0}</div><div class="stat-card__label">جدد اليوم</div><div class="stat-card__trend stat-card__trend--up">+${d.newUsersRegistered ?? 0} مسجل / ${d.newGuestsToday ?? 0} ضيف</div></div></div>
+          <div class="stat-card"><div class="stat-card__icon stat-card__icon--yellow">⭐</div><div><div class="stat-card__value">${d.premiumCount ?? 0}</div><div class="stat-card__label">مشتركون بريميوم</div></div></div>
+          <div class="stat-card"><div class="stat-card__icon stat-card__icon--red">🔥</div><div><div class="stat-card__value">${d.activeUsers ?? 0}</div><div class="stat-card__label">نشطون آخر 7 أيام</div></div></div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
